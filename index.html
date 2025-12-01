@@ -478,15 +478,15 @@
         
         <div class="nav-scroller">
             <div class="nav-tabs">
-                <button class="tab-btn active" onclick="openTab('overview')">Ringkasan</button>
-                <button class="tab-btn" onclick="openTab('sesi1')">Sesi 1: Diagnostic</button>
-                <button class="tab-btn" onclick="openTab('sesi2')">Sesi 2: Content 1</button>
-                <button class="tab-btn" onclick="openTab('sesi3')">Sesi 3: Content 2</button>
-                <button class="tab-btn" onclick="openTab('sesi4')">Sesi 4: SNBT Adv</button>
-                <button class="tab-btn" onclick="openTab('sesi5')">Sesi 5: Pedagogy</button>
-                <button class="tab-btn" onclick="openTab('sesi6')">Sesi 6: Offline Skill</button>
-                <button class="tab-btn" onclick="openTab('sesi7')">Sesi 7: Mgmt Kelas</button>
-                <button class="tab-btn" onclick="openTab('sesi8')">Sesi 8: Final Demo</button>
+                <button class="tab-btn active" onclick="window.openTab('overview')">Ringkasan</button>
+                <button class="tab-btn" onclick="window.openTab('sesi1')">Sesi 1: Diagnostic</button>
+                <button class="tab-btn" onclick="window.openTab('sesi2')">Sesi 2: Content 1</button>
+                <button class="tab-btn" onclick="window.openTab('sesi3')">Sesi 3: Content 2</button>
+                <button class="tab-btn" onclick="window.openTab('sesi4')">Sesi 4: SNBT Adv</button>
+                <button class="tab-btn" onclick="window.openTab('sesi5')">Sesi 5: Pedagogy</button>
+                <button class="tab-btn" onclick="window.openTab('sesi6')">Sesi 6: Offline Skill</button>
+                <button class="tab-btn" onclick="window.openTab('sesi7')">Sesi 7: Mgmt Kelas</button>
+                <button class="tab-btn" onclick="window.openTab('sesi8')">Sesi 8: Final Demo</button>
             </div>
         </div>
     </header>
@@ -1054,7 +1054,133 @@
                 </div>
             </div>
 
-            <p><strong>Fokus:</strong> Quantitative Reasoning & Logic Traps (Bukan sekadar hitung cepat).</p>
+            <p><strong>Fokus:</strong> Quantitative Reasoning (Penalaran Kuantitatif) & Logic Traps. Mengubah mindset dari "Tukang Hitung" menjadi "Ahli Strategi".</p>
+
+            <div class="highlight-box">
+                <strong>Mindset Shift:</strong> Di sekolah, jawaban akhir itu penting. Di SNBT, <em>cara mengambil keputusan</em> lebih penting. Sesi ini melatih insting guru untuk mengenali "Jalan Buntu" dan "Jalan Tikus".
+            </div>
+
+            <h3>1. Bedah Tipe Soal "Maut"</h3>
+            
+            <h4>A. Analisis Kecukupan Data (Data Sufficiency)</h4>
+            <p>Ini adalah tipe soal yang paling sering membunuh skor siswa karena butuh logika deduktif yang ketat.</p>
+            <div class="script-text">
+                <strong>Strategi Guru:</strong> Jangan langsung hitung! Cek pernyataan satu per satu.
+                <br>1. Cek Pernyataan (1) saja. (Cukup/Tidak?)
+                <br>2. Cek Pernyataan (2) saja. (Cukup/Tidak?)
+                <br>3. Jika keduanya gagal sendiri-sendiri, baru Cek Gabungan (1) & (2).
+            </div>
+
+            <h4>B. Perbandingan Kuantitatif (P vs Q)</h4>
+            <p>Tujuannya membandingkan dua nilai tanpa harus menghitung nilai pastinya (Approximation/Estimation). Guru harus bisa mengajarkan teknik "Pembulatan Cerdas".</p>
+
+            <h3>2. Bank Soal & Drill (Latihan)</h3>
+
+            <div class="quiz-container">
+                <!-- Soal 1: Kecukupan Data -->
+                <div class="quiz-box">
+                    <div class="quiz-question">1. [Kecukupan Data] Berapakah nilai $x$? <br>(1) $x^2 - 4x + 3 = 0$ <br>(2) $x$ adalah bilangan prima genap.</div>
+                    <ul class="quiz-options">
+                        <li>A. (1) saja cukup</li>
+                        <li>B. (2) saja cukup</li>
+                        <li>C. Dua pernyataan bersama-sama cukup</li>
+                        <li>D. (1) saja cukup DAN (2) saja cukup</li>
+                        <li>E. Tidak cukup</li>
+                    </ul>
+                    <div class="correct-answer">
+                        <strong>Kunci: B. Pernyataan (2) saja cukup.</strong><br>
+                        Analisis (1): $(x-3)(x-1)=0 \to x=3$ atau $x=1$. (Ada 2 jawaban $\to$ Tidak Cukup).<br>
+                        Analisis (2): Satu-satunya bilangan prima genap adalah 2. Maka $x=2$. (Nilai tunggal $\to$ Cukup).
+                    </div>
+                </div>
+                
+                <!-- Soal 2: Kecukupan Data Trap -->
+                <div class="quiz-box">
+                    <div class="quiz-question">2. [Logika Pertidaksamaan] Apakah $x > y$? <br>(1) $x/y > 1$ <br>(2) $x + y > 0$</div>
+                    <div class="correct-answer">
+                        <strong>Kunci: C. Dua pernyataan bersama-sama cukup.</strong><br>
+                        (1) $x/y > 1$. Jika $x,y$ negatif (misal $x=-4, y=-2$), maka $2 > 1$ tapi $x < y$. Tidak cukup.<br>
+                        (2) $x+y > 0$. Bisa saja $x=2, y=5$ ($x<y$) atau $x=5, y=2$ ($x>y$). Tidak cukup.<br>
+                        Gabungan: $x/y > 1$ artinya $x,y$ bertanda sama. $x+y>0$ artinya jumlahnya positif. Maka $x,y$ pasti keduanya positif. Jika keduanya positif dan $x/y > 1$, maka pasti $x > y$.
+                    </div>
+                </div>
+
+                <!-- Soal 3: Average Speed Trap -->
+                <div class="quiz-box">
+                    <div class="quiz-question">3. [Jebakan] Berangkat dari A ke B kecepatan 40 km/jam. Pulang dari B ke A kecepatan 60 km/jam. Kecepatan rata-rata total?</div>
+                    <ul class="quiz-options">
+                        <li>A. 48 km/jam</li>
+                        <li>B. 50 km/jam</li>
+                        <li>C. 52 km/jam</li>
+                        <li>D. 55 km/jam</li>
+                        <li>E. 58 km/jam</li>
+                    </ul>
+                    <div class="correct-answer">
+                        <strong>Kunci: A (48 km/jam).</strong><br>
+                        Jebakan: Rata-rata $\frac{40+60}{2} = 50$ (SALAH BESAR!).<br>
+                        Konsep: $V_{avg} = \frac{\text{Total Jarak}}{\text{Total Waktu}}$.<br>
+                        Rumus Cepat (Harmonic Mean): $\frac{2 v_1 v_2}{v_1 + v_2} = \frac{2(40)(60)}{100} = 48$.
+                    </div>
+                </div>
+
+                <!-- Soal 4: P vs Q -->
+                <div class="quiz-box">
+                    <div class="quiz-question">4. [P vs Q] $P = \frac{333}{444}$, $Q = \frac{555}{666}$. Hubungan P dan Q?</div>
+                    <div class="correct-answer">
+                        <strong>Kunci: P < Q</strong><br>
+                        Trik: Sederhanakan! <br>
+                        $P = 3 \times 111 / 4 \times 111 = 3/4 = 0.75$<br>
+                        $Q = 5 \times 111 / 6 \times 111 = 5/6 \approx 0.83$<br>
+                        Jangan hitung manual pembagiannya.
+                    </div>
+                </div>
+
+                <!-- Soal 5: Diskon Bertingkat -->
+                <div class="quiz-box">
+                    <div class="quiz-question">5. [Jebakan] Baju didiskon 50% + 20%. Total diskon sebenarnya adalah?</div>
+                    <div class="correct-answer">
+                        <strong>Kunci: 60%</strong><br>
+                        Bukan 70%.<br>
+                        Misal harga 100. Diskon 50% $\to$ sisa 50.<br>
+                        Diskon lagi 20% dari 50 $\to$ $0.2 \times 50 = 10$.<br>
+                        Total potongan: $50 + 10 = 60$.
+                    </div>
+                </div>
+
+                <!-- Soal 6: Pola Bilangan -->
+                <div class="quiz-box">
+                    <div class="quiz-question">6. [Pola Bilangan] 2, 3, 5, 6, 8, 9, ... Dua angka berikutnya?</div>
+                    <div class="correct-answer">
+                        <strong>Kunci: 11, 12</strong><br>
+                        Pola lompat: +1, +2, +1, +2, +1, +2.<br>
+                        Atau selang-seling (ganjil/genap): (2, 5, 8 $\to$ +3) dan (3, 6, 9 $\to$ +3).
+                    </div>
+                </div>
+            </div>
+
+            <h3>3. Do's & Don'ts (Strategic Thinking)</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th class="dont">❌ JANGAN (Kebiasaan Buruk)</th>
+                        <th class="do">✅ HARUS (Strategi SNBT)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="dont-col">Menganggap gambar geometri di soal itu 100% akurat sesuai skala (misal: "Kelihatannya siku-siku").</td>
+                        <td class="do-col">Asumsikan gambar TIDAK sesuai skala ("Not drawn to scale") kecuali disebutkan. Percaya pada angka dan simbol, bukan mata.</td>
+                    </tr>
+                    <tr>
+                        <td class="dont-col">Menghitung $3.14 \times 15^2$ secara detail sampai 4 desimal. Habis waktu!</td>
+                        <td class="do-col">Gunakan pendekatan (Approximation). $3.14 \approx 3$ atau $22/7$. Cek opsi jawaban, jika jaraknya jauh, taksiran kasar sudah cukup.</td>
+                    </tr>
+                    <tr>
+                        <td class="dont-col">Terjebak mengerjakan soal sulit di nomor awal.</td>
+                        <td class="do-col">Ajarkan teknik "Skipping". Jika 1 menit buntu, LEWATI. Semua soal bobotnya (biasanya) sama atau menggunakan IRT, jangan korbankan 3 soal mudah demi 1 soal sulit.</td>
+                    </tr>
+                </tbody>
+            </table>
 
             <table class="rundown-table">
                 <thead>
@@ -1063,29 +1189,35 @@
                 <tbody>
                     <tr>
                         <td>00-30'</td>
-                        <td>Data Sufficiency</td>
+                        <td>Data Sufficiency Drill</td>
                         <td>
-                            Analisis Kecukupan Data (Pernyataan 1 & 2).<br>
-                            Drill logika: Cek kasus ekstrem (angka 0, angka negatif, pecahan). Jangan asumsi gambar sesuai skala.
+                            Bedah logika opsi A, B, C, D, E.<br>
+                            Latihan membuat contoh penyangkal (Counter-example) untuk membuktikan pernyataan "TIDAK CUKUP".
                         </td>
                     </tr>
                     <tr>
                         <td>30-60'</td>
                         <td>Pattern Recognition</td>
-                        <td>Pola Bilangan bertingkat, Fibonacci tersembunyi, dan Analogi Gambar (Figural).</td>
+                        <td>
+                            Latihan soal Deret Angka & Huruf.<br>
+                            Latihan Figural (Analogi Gambar, Rotasi, Pencerminan). Tips: Cari elemen yang berubah paling mencolok (misal: warna titik).
+                        </td>
                     </tr>
                     <tr>
                         <td>60-90'</td>
-                        <td>"The Batman Trap"</td>
+                        <td>Trap Identification</td>
                         <td>
-                            Membahas soal jebakan. Contoh: "Diskon 50% + 20%". Banyak yang jawab 70%, padahal 60%.<br>
-                            Peserta harus bisa menjelaskan logika persentase bertingkat dengan cepat.
+                            Menganalisis soal-soal jebakan (Average Speed, Diskon, Himpunan).<br>
+                            Peserta diminta membuat 1 soal jebakan versi mereka sendiri.
                         </td>
                     </tr>
                     <tr>
                         <td>90-120'</td>
-                        <td>Speed Battle</td>
-                        <td>10 Soal HOTS. Waktu 45 detik/soal. Yang salah/lambat harus <i>Open Mic</i> jelaskan kendalanya.</td>
+                        <td>Speed Battle Royale</td>
+                        <td>
+                            Simulasi Ujian: 10 Soal dalam 10 Menit.<br>
+                            Review: Fokus pada "Cara Tercepat", bukan sekadar "Cara Benar". Siapa yang nemu jalan tikus?
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -1288,7 +1420,8 @@
 
     <!-- JavaScript for Tabs -->
     <script>
-        function openTab(tabId) {
+        // Use window.openTab to ensure it's globally accessible
+        window.openTab = function(tabId) {
             // Hide all content sections
             const contents = document.querySelectorAll('.content-section');
             contents.forEach(content => {
@@ -1302,10 +1435,19 @@
             });
 
             // Show specific content
-            document.getElementById(tabId).classList.add('active');
+            const selectedTab = document.getElementById(tabId);
+            if (selectedTab) {
+                selectedTab.classList.add('active');
+            } else {
+                console.error("Tab ID not found:", tabId);
+            }
 
             // Set active button state
-            const activeBtn = Array.from(buttons).find(btn => btn.getAttribute('onclick').includes(tabId));
+            const activeBtn = Array.from(buttons).find(btn => {
+                const onclickVal = btn.getAttribute('onclick');
+                return onclickVal && onclickVal.includes(tabId);
+            });
+            
             if (activeBtn) {
                 activeBtn.classList.add('active');
             }
@@ -1314,7 +1456,10 @@
             if (window.innerWidth < 768) {
                 window.scrollTo({top: 0, behavior: 'smooth'});
             }
-        }
+        };
+        
+        // Log to confirm script loaded
+        console.log("Math Lesson Plan Interactive Script Loaded");
     </script>
 </body>
 </html>
