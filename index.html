@@ -1234,43 +1234,179 @@
                 </div>
             </div>
 
-            <p><strong>Fokus:</strong> Menghubungkan materi sekolah (Konsep) dengan materi Bimbel (Trik).</p>
+            <p><strong>Fokus:</strong> Seni Pedagogi Hibrida. Mengubah cara sekolah (konseptual) menjadi cara bimbel (taktis) tanpa membuat siswa merasa "berdosa" atau bingung.</p>
 
             <div class="highlight-box">
-                Guru bimbel yang baik tidak merendahkan cara sekolah, tapi menggunakannya sebagai pijakan untuk trik cepat.
+                <strong>The "Double Agent" Manifesto:</strong><br>
+                Jangan pernah berkata: <em>"Cara guru sekolahmu itu bodoh/lama, lupakan saja!"</em> (Ini arogansi).<br>
+                Berkatalah: <em>"Cara sekolahmu itu BENAR untuk Esai. Tapi untuk Pilihan Ganda, mari kita lihat polanya agar lebih cepat."</em> (Ini empati).
             </div>
 
-            <h3>Framework: The Bridge Technique</h3>
+            <h3>1. Framework: The Bridge Technique</h3>
+            <p>Guru harus melatih transisi 3 langkah ini di setiap topik:</p>
             <ol style="margin-bottom: 20px;">
-                <li><strong>Validate:</strong> Tuliskan cara sekolah (rumus formal) sebentar.</li>
-                <li><strong>Observe:</strong> Ajak siswa melihat pola dari cara sekolah tersebut.</li>
-                <li><strong>Hack:</strong> Tarik kesimpulan cara cepat berdasarkan pola tadi.</li>
+                <li><strong>Phase 1: Validate (Validasi).</strong> Tuliskan cara formal sebentar. Tunjukkan bahwa kita menghormati proses itu. <em>"Kalau di ulangan harian, kalian wajib tulis begini..."</em></li>
+                <li><strong>Phase 2: Observe (Observasi).</strong> Ajak siswa melihat pola/struktur yang berulang. <em>"Coba perhatikan, setiap kali kita eliminasi, angka ini selalu dikurang ini, kan?"</em></li>
+                <li><strong>Phase 3: Hack (Eksekusi).</strong> Tarik kesimpulan menjadi rumus praktis. <em>"Nah, karena polanya selalu begitu, besok langsung aja pakai cara ini."</em></li>
             </ol>
 
+            <h3>2. Case Studies (Contoh Konkret Materi)</h3>
+
+            <!-- Case 1 -->
+            <div style="background: #f0f9ff; border: 1px solid #bae6fd; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top:0; color:#0369a1;">Kasus 1: Barisan Aritmatika</h4>
+                <p><strong>Soal:</strong> Suku ke-3 adalah 11, suku ke-7 adalah 23. Berapakah suku ke-20?</p>
+                
+                <table class="rundown-table" style="background:white;">
+                    <tr>
+                        <th style="width:30%">School Way (Formal)</th>
+                        <th style="width:30%">The Bridge (Logic)</th>
+                        <th style="width:40%">The Hack (Sniper)</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            Eliminasi SPLDV:<br>
+                            $U_7 = a + 6b = 23$<br>
+                            $U_3 = a + 2b = 11$<br>
+                            ---------------- -<br>
+                            $4b = 12 \to b=3$<br>
+                            Subs $b=3 \to a=5$<br>
+                            $U_{20} = 5 + 19(3) = 62$
+                        </td>
+                        <td>
+                            "Bayangkan kamu melangkah.<br>
+                            Dari lantai 3 ke lantai 7 itu naik 4 lantai.<br>
+                            Selisih nilainya $23-11 = 12$.<br>
+                            Berarti per lantai naik $12 \div 4 = 3$.<br>
+                            Itulah bedanya!"
+                        </td>
+                        <td>
+                            <strong>"Jump Technique"</strong><br>
+                            Gak usah cari $a$ (suku awal)!<br>
+                            Dari $U_7$ mau ke $U_{20}$ butuh 13 langkah lagi.<br>
+                            $U_{20} = U_7 + 13b$<br>
+                            $U_{20} = 23 + 13(3) = 23 + 39 = 62$.<br>
+                            (Selesai dalam 1 baris).
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Case 2 -->
+            <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top:0; color:#15803d;">Kasus 2: Limit Tak Hingga Aljabar</h4>
+                <p><strong>Soal:</strong> $\lim_{x \to \infty} \frac{3x^2 + 5x - 1}{4x^2 - 2x + 7}$</p>
+                
+                <table class="rundown-table" style="background:white;">
+                    <tr>
+                        <th>School Way (Formal)</th>
+                        <th>The Bridge (Logic)</th>
+                        <th>The Hack (Sniper)</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            Bagi semua suku dengan pangkat tertinggi ($x^2$).<br>
+                            $\frac{3 + 5/x - 1/x^2}{4 - 2/x + 7/x^2}$<br>
+                            Substitusi $\infty$, semua pecahan jadi 0.<br>
+                            Hasil: $3/4$.
+                        </td>
+                        <td>
+                            "Bayangkan $x$ itu Uang Triliunan.<br>
+                            Punya $3x^2$ (Triliun kuadrat) itu kaya banget.<br>
+                            Ditambah $5x$ (Recehan) gak ngaruh.<br>
+                            Jadi fokus aja sama 'Bos Besarnya'."
+                        </td>
+                        <td>
+                            <strong>"Koefisien Pangkat Tertinggi"</strong><br>
+                            Lihat pangkat $x$.<br>
+                            Atas $x^2$, Bawah $x^2$. Sama kuat.<br>
+                            Ambil angkanya aja: $\frac{3}{4}$.<br>
+                            (Selesai 2 detik).
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Case 3 -->
+            <div style="background: #fff7ed; border: 1px solid #fed7aa; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h4 style="margin-top:0; color:#c2410c;">Kasus 3: Menyusun Persamaan Kuadrat Baru</h4>
+                <p><strong>Soal:</strong> Akar-akar $x^2 - 3x + 5 = 0$ adalah $x_1, x_2$. Tentukan PK baru yang akarnya $2x_1+1$ dan $2x_2+1$.</p>
+                
+                <table class="rundown-table" style="background:white;">
+                    <tr>
+                        <th>School Way (Formal)</th>
+                        <th>The Bridge (Logic)</th>
+                        <th>The Hack (Sniper)</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            Cari $x_1+x_2=3$, $x_1.x_2=5$.<br>
+                            Misal akar baru $\alpha, \beta$.<br>
+                            $\alpha+\beta = (2x_1+1)+(2x_2+1) = 2(3)+2=8$<br>
+                            $\alpha.\beta = \dots$ (Hitung panjang)<br>
+                            Rumus: $x^2 - (\alpha+\beta)x + \alpha.\beta = 0$
+                        </td>
+                        <td>
+                            "Ini adalah transformasi.<br>
+                            Akar lama ($x_{lama}$) diubah jadi akar baru ($x_{baru}$).<br>
+                            Hubungannya: $x_{baru} = 2x_{lama} + 1$.<br>
+                            Berarti $x_{lama} = \frac{x_{baru}-1}{2}$."
+                        </td>
+                        <td>
+                            <strong>"Metode Invers"</strong><br>
+                            Langsung substitusi inversnya ke persamaan awal!<br>
+                            Ganti setiap $x$ dengan $(\frac{x-1}{2})$.<br>
+                            $(\frac{x-1}{2})^2 - 3(\frac{x-1}{2}) + 5 = 0$<br>
+                            Kali 4 semua $\to$ Selesai.<br>
+                            (Tanpa cari jumlah/kali akar).
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <h3>3. Roleplay Scripts (Naskah Guru)</h3>
+            <p>Peserta akan diminta mempraktikkan dialog ini:</p>
+            <div class="quiz-container">
+                <div class="quiz-box">
+                    <strong>Skenario A: Siswa takut pakai cara cepat</strong><br>
+                    <em>Siswa: "Kak, nanti kalau aku pakai cara itu di sekolah, disalahin guru gimana?"</em><br><br>
+                    <strong>Respons Guru (Pass):</strong><br>
+                    "Pertanyaan bagus! Untuk PR sekolah, kamu <strong>wajib</strong> pakai cara yang panjang tadi ya, biar nilaimu aman. Tapi, cara cepat ini simpan buat ulangan harian PG atau nanti pas UTBK. Jadi kamu punya dua senjata. Oke?"
+                </div>
+                <div class="quiz-box">
+                    <strong>Skenario B: Siswa meremehkan konsep</strong><br>
+                    <em>Siswa: "Kelamaan Kak jelasin asalnya, langsung rumusnya aja mana?"</em><br><br>
+                    <strong>Respons Guru (Pass):</strong><br>
+                    "Sabar, Bro. Kalau soalnya diputar dikit sama pembuat soal, rumus cepat itu gak mempan lho. Aku kasih tau asalnya 1 menit aja, biar kamu paham logikanya, habis itu baru kita gas pakai cara kilat. Deal?"
+                </div>
+            </div>
+
+            <h3>4. Rundown Sesi 5</h3>
             <table class="rundown-table">
                 <thead>
-                    <tr><th>Waktu</th><th>Aktivitas</th><th>Detail Materi</th></tr>
+                    <tr><th>Waktu</th><th>Aktivitas</th><th>Detail Drill</th></tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>00-20'</td>
-                        <td>Psikologi Siswa</td>
-                        <td>Menangani siswa prosedural (takut cara cepat) vs siswa pragmatis (males nulis).</td>
+                        <td>00-30'</td>
+                        <td>Bedah "The Bridge"</td>
+                        <td>Trainer mendemonstrasikan 3 Kasus di atas. Menunjukkan kontras antara "Hanya Cara Cepat" (Bahaya) vs "Jembatan" (Aman & Cepat).</td>
                     </tr>
                     <tr>
-                        <td>20-60'</td>
-                        <td>Roleplay Barisan</td>
+                        <td>30-80'</td>
+                        <td>Roleplay Practice</td>
                         <td>
-                            Topik: Barisan Aritmatika.<br>
-                            Transisi dari rumus $U_n = a+(n-1)b$ ke rumus linear $bn + (a-b)$.
+                            <strong>Breakout Room:</strong><br>
+                            Peserta A jadi Guru, Peserta B jadi Siswa yang "Skeptis" atau "Pragmatis".<br>
+                            Tugas: Jelaskan topik <strong>Turunan Rantai</strong> dengan teknik Bridge.
                         </td>
                     </tr>
                     <tr>
-                        <td>60-120'</td>
-                        <td>Drill Topik Lain</td>
+                        <td>80-120'</td>
+                        <td>Innovation Challenge</td>
                         <td>
-                            - Persamaan Kuadrat (Rumus ABC $\to$ Trik Faktor).<br>
-                            - Trigonometri (Segitiga $\to$ Hafalan Jari).
+                            Peserta diberi topik acak (misal: Logaritma, Dimensi Tiga, Peluang).<br>
+                            Dalam 5 menit, ciptakan "Jembatan" versi mereka sendiri. Bagaimana menjelaskan cara cepat Jarak Titik ke Bidang (Kubus) tanpa menghilangkan konsep proyeksi?
                         </td>
                     </tr>
                 </tbody>
