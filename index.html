@@ -953,7 +953,7 @@
         <!-- TAB: SESI 3 -->
         <div id="sesi3" class="content-section">
             <div class="header-row">
-                <h2>Sesi 3: Content Mastery (Integral)</h2>
+                <h2>Sesi 3: Content Mastery 2 (Integral)</h2>
                 <div class="page-logos">
                     <img src="https://imgix3.ruangguru.com/assets/miscellaneous/png_zekej2_3984.png" alt="Ruangguru">
                     <img src="https://imgix3.ruangguru.com/assets/miscellaneous/png_63qwb1_5293.png" alt="Brain Academy">
@@ -961,11 +961,44 @@
                 </div>
             </div>
 
-            <p><strong>Fokus:</strong> Integral Deep Dive (Konsep Akumulasi Luas & Volume).</p>
+            <p><strong>Fokus:</strong> Mengubah mindset dari "Integral adalah Anti-Turunan" (Mekanik) menjadi "Integral adalah Akumulasi/Penjumlahan" (Konseptual).</p>
 
-            <div class="script-text">
-                "Integral itu bukan sekadar kebalikan turunan. Itu adalah penjumlahan partisi yang sangat banyak (Riemann Sum)."
+            <div class="highlight-box">
+                <strong>The Big Idea:</strong> Lambang $\int$ itu sebenarnya adalah huruf "S" yang ditarik panjang (dari kata <em>Summa</em>/Sum). Mengajar integral tanpa bicara soal "Penjumlahan" adalah dosa besar pedagogis.
             </div>
+
+            <h3>Alur Logika: From Area to Integral</h3>
+            <ol>
+                <li><strong>Masalah Luas Area Tidak Beraturan:</strong> Kita cuma punya rumus luas persegi/segitiga. Bagaimana menghitung luas di bawah parabola?</li>
+                <li><strong>Ide "Partisi" (Slicing):</strong> Potong area menjadi persegi panjang kecil-kecil. Hitung luas masing-masing (Alas $\times$ Tinggi).</li>
+                <li><strong>Ide "Riemann Sum":</strong> Jumlahkan semua luas persegi panjang tersebut ($\sum$). Masih ada error/celah.</li>
+                <li><strong>Ide "Limit":</strong> Buat lebar persegi panjang mendekati nol ($dx \to 0$). Jumlah persegi panjang menjadi tak hingga.</li>
+                <li><strong>Definisi Integral Tentu:</strong> $\int_a^b f(x) dx$. Ini adalah limit dari jumlah Riemann.</li>
+            </ol>
+
+            <h3>Do's & Don'ts for Teachers</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th class="dont">❌ JANGAN (Common Pitfalls)</th>
+                        <th class="do">✅ HARUS (Best Practice)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="dont-col">Mengenalkan Integral langsung sebagai "Pangkat ditambah satu, lalu dibagi pangkat baru". Itu cara robot.</td>
+                        <td class="do-col">Mulai dengan masalah geometri: "Coba hitung luas daun ini!". Kenalkan konsep pendekatan (aproksimasi).</td>
+                    </tr>
+                    <tr>
+                        <td class="dont-col">Menyuruh siswa menghafal rumus Volume Benda Putar ($\pi \int y^2 dx$) tanpa visualisasi.</td>
+                        <td class="do-col">Gunakan peraga (mentimun/wortel dipotong tipis). Tunjukkan bahwa $\pi y^2$ adalah luas lingkaran (kepingan), lalu dijumlahkan ($\int$).</td>
+                    </tr>
+                    <tr>
+                        <td class="dont-col">Bingung menjelaskan bedanya Integral Tentu dan Tak Tentu.</td>
+                        <td class="do-col">Jelaskan Teorema Dasar Kalkulus yang menghubungkan "Pencarian Luas" dengan "Anti-Turunan".</td>
+                    </tr>
+                </tbody>
+            </table>
 
             <table class="rundown-table">
                 <thead>
@@ -974,29 +1007,37 @@
                 <tbody>
                     <tr>
                         <td>00-30'</td>
-                        <td>Riemann Sum</td>
-                        <td>Hitung luas di bawah kurva $y=x^2$ dari 0 sampai 1 tanpa rumus integral $\int$. Gunakan pendekatan persegi panjang.</td>
+                        <td>Riemann Sum Challenge</td>
+                        <td>
+                            <strong>Tanpa Rumus Integral:</strong> Peserta diminta menghitung estimasi luas di bawah kurva $y=x^2$ dari 0 s.d 1 menggunakan 4 persegi panjang.<br>
+                            Bandingkan hasilnya jika pakai 8 persegi panjang. (Semakin banyak = semakin akurat).
+                        </td>
                     </tr>
                     <tr>
                         <td>30-70'</td>
-                        <td>Teknik Integrasi</td>
+                        <td>Teknik Integrasi (Heuristik)</td>
                         <td>
-                            Membedakan <b>Substitusi</b> vs <b>Parsial</b>.<br>
-                            Trik: "Cari Turunan Anaknya". Jika turunan fungsi dalam ada di luar, pakai Substitusi. Jika tidak nyambung, pakai Parsial (Tabel Tanzalin).
+                            Jangan cuma latihan soal. Ajarkan <strong>Cara Mendiagnosa Soal</strong>:<br>
+                            1. Ada turunan "dalamnya" di luar? $\to$ <strong>Substitusi</strong>.<br>
+                            2. Perkalian fungsi beda jenis (misal $x^2$ dan $\sin x$)? $\to$ <strong>Parsial (Tanzalin)</strong>.<br>
+                            3. Bentuk kuadrat di bawah akar? $\to$ <strong>Substitusi Trigonometri</strong>.
                         </td>
                     </tr>
                     <tr>
                         <td>70-100'</td>
-                        <td>Volume Benda Putar</td>
+                        <td>Visualisasi 3D (Volume)</td>
                         <td>
-                            Visualisasi 3D. Peserta diminta menggunakan botol/pulpen untuk simulasi sumbu putar.<br>
-                            Latih menggambar metode Cakram vs Cincin di papan tulis 2D.
+                            Konsep "Slicing" (Irisan).<br>
+                            Menggambar metode Cakram (Disk) vs Cincin (Washer) di papan tulis. Peserta harus bisa menjelaskan <em>kenapa</em> rumus Cincin itu $\pi(R^2 - r^2)$.
                         </td>
                     </tr>
                     <tr>
                         <td>100-120'</td>
                         <td>Micro-Teaching</td>
-                        <td>Topik: Luas Daerah Antara Dua Kurva. Wajib gambar sketsa dulu sebelum hitung.</td>
+                        <td>
+                            Topik: Aplikasi Integral (Luas/Volume).<br>
+                            <strong>Syarat Lulus Sesi:</strong> Gambar grafik harus benar, arsir daerah yang dimaksud, dan tentukan batas integral dengan benar sebelum menghitung.
+                        </td>
                     </tr>
                 </tbody>
             </table>
