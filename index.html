@@ -351,6 +351,39 @@
                 grid-template-columns: 1fr;
             }
         }
+        
+        /* --- Comparison Table (Do's & Don'ts) --- */
+        .comparison-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        
+        .comparison-table th {
+            padding: 12px;
+            color: white;
+            font-weight: 800;
+            text-align: center;
+        }
+        
+        .comparison-table th.dont { background-color: var(--accent-danger); }
+        .comparison-table th.do { background-color: var(--accent-success); }
+        
+        .comparison-table td {
+            padding: 15px;
+            vertical-align: top;
+            border-bottom: 1px solid var(--border);
+            width: 50%;
+        }
+        
+        .comparison-table td.dont-col { background-color: #fef2f2; color: #991b1b; }
+        .comparison-table td.do-col { background-color: #f0fdf4; color: #166534; }
+        
+        .comparison-table tr:last-child td { border-bottom: none; }
 
         /* --- Components --- */
         .rundown-table {
@@ -512,8 +545,8 @@
                 <div class="roadmap-item">
                     <div class="roadmap-marker">2</div>
                     <div class="roadmap-content">
-                        <span class="roadmap-title">Sesi 2: Content Mastery 1 (Kalkulus Dasar)</span>
-                        <p>Limit & Turunan. Mengubah pendekatan prosedural menjadi visual & intuitif.</p>
+                        <span class="roadmap-title">Sesi 2: Content Mastery 1 (The Calculus Bridge)</span>
+                        <p>Limit & Turunan. Membangun jembatan visual dari Garis Potong ke Garis Singgung.</p>
                     </div>
                 </div>
 
@@ -829,7 +862,7 @@
         <!-- TAB: SESI 2 -->
         <div id="sesi2" class="content-section">
             <div class="header-row">
-                <h2>Sesi 2: Content Mastery (Calculus 1)</h2>
+                <h2>Sesi 2: Content Mastery (The Calculus Bridge)</h2>
                 <div class="page-logos">
                     <img src="https://imgix3.ruangguru.com/assets/miscellaneous/png_zekej2_3984.png" alt="Ruangguru">
                     <img src="https://imgix3.ruangguru.com/assets/miscellaneous/png_63qwb1_5293.png" alt="Brain Academy">
@@ -837,11 +870,44 @@
                 </div>
             </div>
 
-            <p><strong>Fokus:</strong> Memperbaiki cara mengajarkan Limit dan Turunan (Visualisasi & Intuisi).</p>
+            <p><strong>Fokus:</strong> Memperbaiki keruntutan logika dari Limit ke Turunan. Banyak guru "melompat" langsung ke rumus $nx^{n-1}$ tanpa menjelaskan bahwa <strong>Turunan ADALAH Limit</strong>.</p>
 
             <div class="highlight-box">
-                Goal: Menghapus kebiasaan mengajar prosedural kaku ("Pangkat turun, pangkat dikurang satu").
+                <strong>The Logic Gap:</strong> Siswa sering bingung kenapa kita belajar "mendekati nol" (Limit) lalu tiba-tiba menghitung gradien (Turunan). Sesi ini menjembatani gap tersebut.
             </div>
+
+            <h3>Alur Logika: From Limit to Derivative</h3>
+            <ol>
+                <li><strong>Masalah Gradien Garis Lurus:</strong> Mudah. $m = \frac{y_2-y_1}{x_2-x_1}$.</li>
+                <li><strong>Tantangan Gradien Kurva:</strong> Susah. Kemiringannya berubah-ubah. Kita tidak bisa pakai 2 titik yang jauh.</li>
+                <li><strong>Ide "Garis Potong" (Secant):</strong> Ambil 2 titik berjarak $h$. Ini adalah rata-rata perubahan.</li>
+                <li><strong>Ide "Limit" (The Magic):</strong> Geser titik kedua mendekati titik pertama sampai $h \to 0$. Garis potong berubah menjadi <strong>Garis Singgung (Tangent)</strong>.</li>
+                <li><strong>Definisi Turunan:</strong> $f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}$. Rumus cepat lahir dari definisi ini!</li>
+            </ol>
+
+            <h3>Do's & Don'ts for Teachers</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th class="dont">❌ JANGAN (Common Pitfalls)</th>
+                        <th class="do">✅ HARUS (Best Practice)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="dont-col">Mengajarkan Limit hanya sebagai "Substitusi Angka". (Misal: $x \to 2$, ganti aja x jadi 2).</td>
+                        <td class="do-col">Jelaskan Limit sebagai "Perilaku fungsi di SEKITAR titik tersebut", gunakan analogi lubang di jalan.</td>
+                    </tr>
+                    <tr>
+                        <td class="dont-col">Langsung kasih rumus cepat $y=x^n \implies y'=nx^{n-1}$ di pertemuan pertama turunan.</td>
+                        <td class="do-col">Wajib buktikan rumus $x^2$ turunannya $2x$ menggunakan definisi limit ($h \to 0$) minimal sekali seumur hidup.</td>
+                    </tr>
+                    <tr>
+                        <td class="dont-col">Tidak pernah menggambar grafik. Hanya main aljabar.</td>
+                        <td class="do-col">Visualisasi gradien positif (naik), negatif (turun), dan nol (puncak/lembah).</td>
+                    </tr>
+                </tbody>
+            </table>
 
             <table class="rundown-table">
                 <thead>
@@ -850,28 +916,35 @@
                 <tbody>
                     <tr>
                         <td>00-20'</td>
-                        <td>De-schooling</td>
-                        <td>Tanya: "Apa itu Limit?". Jika jawabannya cuma "mendekati", kejar: "Mendekati siapa? Dari mana?". Gunakan analogi "Lubang di jalan" untuk limit fungsi.</td>
-                    </tr>
-                    <tr>
-                        <td>20-60'</td>
-                        <td>Visual Derivative</td>
+                        <td>De-schooling Limit</td>
                         <td>
-                            Drill menggambar <b>Gradien Garis Singgung</b>.<br>
-                            Peserta wajib menggambar kurva sembarang, lalu menentukan di titik mana gradiennya positif, negatif, atau nol tanpa menghitung.
+                            Refleksi: Apakah kita selama ini mengajarkan Limit atau cuma mengajarkan Aljabar Faktorisasi? <br>
+                            Drill konsep: Limit Kiri vs Limit Kanan.
                         </td>
                     </tr>
                     <tr>
-                        <td>60-90'</td>
-                        <td>Teaching Sim</td>
+                        <td>20-50'</td>
+                        <td>Visualisasi "The Bridge"</td>
                         <td>
-                            Tantangan: "Jelaskan kenapa Turunan Sinus itu Cosinus menggunakan GRAFIK gelombang, bukan rumus limit h mendekati 0."
+                            Peserta diminta menggambar kurva sembarang. <br>
+                            Simulasikan tangan mereka sebagai garis singgung yang bergerak sepanjang kurva. Rasakan perubahan kemiringannya.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>50-90'</td>
+                        <td>Proofing Challenge</td>
+                        <td>
+                            Tantangan: "Buktikan turunan $\sin(x)$ adalah $\cos(x)$ menggunakan grafik gelombang!" <br>
+                            <em>Clue: Lihat gradien di $x=0$ (max/1) dan di $x=90^\circ$ (datar/0). Siapa fungsi yang nilainya 1 lalu 0? Cosinus.</em>
                         </td>
                     </tr>
                     <tr>
                         <td>90-120'</td>
-                        <td>Soal Cerita</td>
-                        <td>Aplikasi Turunan (Masalah Maksimum/Minimum). Fokus pada penerjemahan bahasa cerita ke model matematika.</td>
+                        <td>Aplikasi Nyata</td>
+                        <td>
+                            Soal Cerita Optimasi (Maksimum/Minimum).<br>
+                            Kuncinya: "Maksimum/Minimum terjadi saat gradiennya DATAR (0)". Maka $f'(x)=0$. Bukan dihafal, tapi dipahami secara visual.
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -880,7 +953,7 @@
         <!-- TAB: SESI 3 -->
         <div id="sesi3" class="content-section">
             <div class="header-row">
-                <h2>Sesi 3: Content Mastery (Calculus 2)</h2>
+                <h2>Sesi 3: Content Mastery (Integral)</h2>
                 <div class="page-logos">
                     <img src="https://imgix3.ruangguru.com/assets/miscellaneous/png_zekej2_3984.png" alt="Ruangguru">
                     <img src="https://imgix3.ruangguru.com/assets/miscellaneous/png_63qwb1_5293.png" alt="Brain Academy">
