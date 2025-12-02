@@ -1205,33 +1205,148 @@
             </div>
         </div>
 
-        <!-- TAB: SESI 5 (SNBT) -->
+        <!-- TAB: SESI 5 (SNBT) - ELABORASI LENGKAP -->
         <div id="sesi5" class="content-section">
             <div class="header-row">
-                <h2>Sesi 5: Numerasi SNBT</h2>
+                <h2>Sesi 5: Numerasi SNBT (The Art of War)</h2>
+                <div class="page-logos">
+                    <span style="font-size: 2rem;">🧠</span>
+                </div>
             </div>
-            <p><strong>Fokus:</strong> Penalaran Kuantitatif & Strategi Ujian.</p>
-            <h3>1. Tipe Soal "Maut"</h3>
-            <h4>A. Analisis Kecukupan Data (Data Sufficiency)</h4>
-            <div class="script-text">
-                <strong>Strategi:</strong> Jangan hitung sampai ketemu angka! Cukup cek apakah informasinya CUKUP.
+        
+            <div class="elaborate-box">
+                <div class="elaborate-title">🎯 The Sniper Mindset</div>
+                <p>
+                    Di SNBT, musuh utamanya adalah <strong>Waktu</strong>. Siswa rata-rata mengerjakan soal dengan "Brute Force" (menghitung detail). 
+                    Siswa terlatih menggunakan "Sniper Mode" (Estimasi, Logika, dan Eliminasi).
+                </p>
+                <p>
+                    <strong>Prinsip Utama:</strong> "Don't calculate if you don't have to." (Jangan menghitung jika tidak diminta nilai pastinya).
+                </p>
             </div>
-            <h4>B. Soal Jebakan (Logic Traps)</h4>
+        
+            <!-- 1. DATA SUFFICIENCY -->
+            <h3>1. Data Sufficiency (Kecukupan Data)</h3>
+            <p>Ini adalah tipe soal paling mematikan bagi siswa yang "rajin menghitung". Tujuannya bukan mencari jawaban, tapi mencari <strong>ketersediaan informasi</strong>.</p>
+        
+            <div class="highlight-box">
+                <strong>The Golden Rule:</strong> <br>
+                Untuk mencari nilai $n$ variabel yang tidak diketahui, kita butuh $n$ persamaan yang independen.
+                <br><em>Contoh:</em> Ada $x$ dan $y$. Butuh 2 persamaan untuk menyelesaikannya.
+            </div>
+        
             <div class="quiz-container">
                 <div class="quiz-box">
-                    <div class="quiz-question">Soal: Baju diskon 50% + 20%. Total diskon?</div>
+                    <div class="quiz-question">Soal: Berapakah nilai $x$?</div>
+                    <p style="margin-bottom:5px;">(1) $x + y = 10$</p>
+                    <p style="margin-bottom:5px;">(2) $x - y = 4$</p>
+                    
+                    <div style="margin-top:15px; border-top:1px dashed #ccc; padding-top:10px;">
+                        <strong>Analisis Sniper:</strong>
+                        <ul style="margin:0; padding-left:20px; font-size:0.9rem;">
+                            <li>Cek (1) saja: Ada 2 variabel ($x,y$), cuma 1 persamaan. ❌ Tidak Cukup.</li>
+                            <li>Cek (2) saja: Ada 2 variabel, cuma 1 persamaan. ❌ Tidak Cukup.</li>
+                            <li>Gabung (1) & (2): Ada 2 variabel, ada 2 persamaan. ✅ Cukup (Eliminasi/Substitusi).</li>
+                        </ul>
+                    </div>
                     <div class="correct-answer">
-                        Bukan 70%! Tapi 60%.<br>
-                        (50% + 20% dari sisa 50% = 10%). Total 60%.
+                        <strong>Jawab: C</strong> (Dua pernyataan BERSAMA-SAMA cukup). <br>
+                        <em>Perhatikan: Kita TIDAK PERLU menghitung bahwa $x=7$. Cukup tahu bahwa itu BISA dihitung.</em>
                     </div>
                 </div>
+                
                 <div class="quiz-box">
-                    <div class="quiz-question">Soal: Kecepatan pergi 40 km/j, pulang 60 km/j. Rata-rata?</div>
+                    <div class="quiz-question">Soal Jebakan: Berapa luas persegi panjang?</div>
+                    <p style="margin-bottom:5px;">(1) Diagonal = 10</p>
+                    <p style="margin-bottom:5px;">(2) Keliling = 28</p>
+                    
                     <div class="correct-answer">
-                        Bukan 50! Tapi 48 km/j.<br>
-                        Gunakan Harmonic Mean $\frac{2ab}{a+b}$.
+                        <strong>Analisis:</strong>
+                        <br>Luas butuh $p \times l$. Kita punya 2 variabel ($p, l$).
+                        <br>(1) $p^2 + l^2 = 100$ (1 persamaan).
+                        <br>(2) $2(p+l) = 28 \to p+l = 14$ (1 persamaan).
+                        <br>Gabungan: Kita punya sistem persamaan $p^2+l^2$ dan $p+l$. Secara aljabar, ini CUKUP untuk mencari $pl$.
+                        <br>Ingat identitas: $(p+l)^2 = p^2 + l^2 + 2pl$.
                     </div>
                 </div>
+            </div>
+        
+            <!-- 2. QUANTITATIVE COMPARISON -->
+            <h3>2. Quantitative Comparison (Hubungan P dan Q)</h3>
+            <p>Triknya adalah <strong>Penyederhanaan</strong> atau <strong>Estimasi</strong>. Jangan cari nilai pasti.</p>
+        
+            <div class="comparison-table">
+                <table style="width:100%">
+                    <tr>
+                        <th style="background-color: #475569;">P</th>
+                        <th style="background-color: #475569;">Q</th>
+                        <th style="background-color: #2563eb;">Analisis Cepat</th>
+                    </tr>
+                    <tr>
+                        <td>$33,33\% \text{ dari } 246$</td>
+                        <td>$24,6\% \text{ dari } 333,3$</td>
+                        <td style="background-color:#eff6ff;">
+                            <strong>Jangan dihitung!</strong><br>
+                            Ubah bentuknya:<br>
+                            $P = \frac{1}{3} \times 246$<br>
+                            $Q = \frac{246}{1000} \times \frac{1000}{3} = \frac{246}{3}$<br>
+                            Ternyata $P = Q$. Sifat komutatif perkalian persen.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>$\sqrt{78}$</td>
+                        <td>$8,9$</td>
+                        <td style="background-color:#eff6ff;">
+                            <strong>Kuadratkan keduanya:</strong><br>
+                            $P^2 = 78$<br>
+                            $Q^2 \approx 9^2 = 81$ (dikit kurang).<br>
+                            $8.9^2$ pasti sekitar 79-an.<br>
+                            Jadi $P < Q$.
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        
+            <!-- 3. LOGIC TRAPS -->
+            <h3>3. The "Death Traps" (Jebakan Logika Umum)</h3>
+            <p>Soal yang terlihat sangat mudah biasanya adalah jebakan.</p>
+        
+            <!-- Trap 1: Speed -->
+            <div style="background:#fff1f2; border-left:4px solid #f43f5e; padding:15px; margin-bottom:15px; border-radius:0 8px 8px 0;">
+                <h4 style="margin:0 0 10px 0; color:#9f1239;">🚫 Jebakan 1: Rata-rata Kecepatan</h4>
+                <p style="margin:0; font-size:0.95rem;">
+                    <strong>Soal:</strong> Pergi 40 km/jam, Pulang 60 km/jam. Rata-rata? <br>
+                    <strong>Jawaban Salah:</strong> $\frac{40+60}{2} = 50$. <br>
+                    <strong>Logika Benar:</strong> Waktu tempuh saat pelan (40) lebih LAMA daripada saat ngebut (60). Jadi rata-rata akan "tertarik" ke arah yang lebih pelan. <br>
+                    <strong>Harmonic Mean:</strong> $\frac{2 \cdot v_1 \cdot v_2}{v_1 + v_2} = \frac{2 \cdot 40 \cdot 60}{100} = 48$ km/jam.
+                </p>
+            </div>
+        
+            <!-- Trap 2: Work -->
+            <div style="background:#fff1f2; border-left:4px solid #f43f5e; padding:15px; margin-bottom:15px; border-radius:0 8px 8px 0;">
+                <h4 style="margin:0 0 10px 0; color:#9f1239;">🚫 Jebakan 2: Pekerja Bersama</h4>
+                <p style="margin:0; font-size:0.95rem;">
+                    <strong>Soal:</strong> Si A selesai 3 jam, Si B selesai 6 jam. Kalau bareng? <br>
+                    <strong>Jawaban Salah:</strong> $3+6=9$ atau $(3+6)/2 = 4.5$. <br>
+                    <strong>Logika Benar:</strong> Kalau dikerjakan berdua, pasti LEBIH CEPAT dari si A (si paling ngebut). Jawabannya harus < 3 jam. <br>
+                    <strong>Rumus Cepat:</strong> $\frac{A \times B}{A + B} = \frac{18}{9} = 2$ jam.
+                </p>
+            </div>
+        
+            <!-- Trap 3: Discount -->
+            <div style="background:#fff1f2; border-left:4px solid #f43f5e; padding:15px; margin-bottom:15px; border-radius:0 8px 8px 0;">
+                <h4 style="margin:0 0 10px 0; color:#9f1239;">🚫 Jebakan 3: Diskon Bertingkat</h4>
+                <p style="margin:0; font-size:0.95rem;">
+                    <strong>Soal:</strong> Diskon 50% + 20%. <br>
+                    <strong>Jawaban Salah:</strong> 70%. <br>
+                    <strong>Logika Benar:</strong> Diskon kedua diambil dari HARGA SISA. <br>
+                    Sisa setelah 50% = 50. Diskon lagi 20% dari 50 (yaitu 10). <br>
+                    Total diskon = $50 + 10 = 60\%$.
+                </p>
+            </div>
+        
+            <div class="success-box">
+                💡 <strong>Strategy Summary:</strong> Di SNBT, yang diuji adalah <em>Number Sense</em> (Kepekaan Angka), bukan kemampuan menghitung koma-koma. Latih mata untuk melihat pola, bukan tangan untuk mencoret-coret.
             </div>
         </div>
 
