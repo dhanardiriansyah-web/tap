@@ -786,23 +786,149 @@
             <p>Guru dilatih menyelesaikan soal cerita kompleks (Word Problems) menggunakan Bar Model sebelum menggunakan Aljabar.</p>
         </div>
 
-        <!-- TAB: SESI 3 (SMP) -->
+        <!-- TAB: SESI 3 (SMP) - ELABORASI LENGKAP -->
         <div id="sesi3" class="content-section">
             <div class="header-row">
-                <h2>Sesi 3: Matematika SMP</h2>
+                <h2>Sesi 3: Matematika SMP (The Great Transition)</h2>
+                <div class="page-logos">
+                    <!-- Icon Aljabar representatif -->
+                    <span style="font-size: 2rem;">📐</span>
+                </div>
             </div>
-            <p><strong>Fokus:</strong> Masa transisi krusial. Transisi dari Aritmatika ke Aljabar.</p>
+        
+            <div class="elaborate-box">
+                <div class="elaborate-title">🌉 Jembatan Aritmatika ke Aljabar</div>
+                <p>
+                    Masalah terbesar siswa SMP adalah <strong>"Abstract Shock"</strong>. 
+                    Di SD, $\square + 5 = 8$ terasa mudah. Di SMP, $x + 5 = 8$ terasa menakutkan.
+                </p>
+                <p>
+                    <strong>Pendekatan Guru:</strong> Jangan langsung mengenalkan $x$ sebagai huruf. 
+                    Kenalkan variabel sebagai <em>"Unknown Quantity"</em> yang mewakili panjang balok dalam Bar Model.
+                </p>
+            </div>
+        
+            <!-- 1. VISUAL PROOF (a+b)^2 -->
+            <h3>1. Visual Proof: The Binomial Expansion</h3>
+            <p>Kesalahan paling fatal dan umum: $(a+b)^2 = a^2 + b^2$. <span style="color:var(--accent-danger); font-weight:bold;">(SALAH!)</span></p>
+            <p>Gunakan pendekatan <strong>Area Model</strong> untuk membuktikan darimana datangnya $2ab$.</p>
+        
+            <!-- Visualisasi CSS Murni untuk (a+b)^2 -->
+            <div style="display: flex; gap: 30px; align-items: center; justify-content: center; flex-wrap: wrap; margin: 20px 0;">
+                
+                <!-- The Square Diagram -->
+                <div style="position: relative; width: 200px; height: 200px; border: 2px solid #334155; display: grid; grid-template-columns: 70% 30%; grid-template-rows: 70% 30%;">
+                    <!-- a^2 -->
+                    <div style="background: #bfdbfe; display: flex; align-items: center; justify-content: center; border: 1px dashed #60a5fa;">
+                        <span style="font-weight: 800; font-size: 1.2rem; color: #1e40af;">$a^2$</span>
+                    </div>
+                    <!-- ab (kanan atas) -->
+                    <div style="background: #bbf7d0; display: flex; align-items: center; justify-content: center; border: 1px dashed #4ade80;">
+                        <span style="font-weight: 700; color: #166534;">$ab$</span>
+                    </div>
+                    <!-- ab (kiri bawah) -->
+                    <div style="background: #bbf7d0; display: flex; align-items: center; justify-content: center; border: 1px dashed #4ade80;">
+                        <span style="font-weight: 700; color: #166534;">$ab$</span>
+                    </div>
+                    <!-- b^2 -->
+                    <div style="background: #fecaca; display: flex; align-items: center; justify-content: center; border: 1px dashed #f87171;">
+                        <span style="font-weight: 700; color: #991b1b;">$b^2$</span>
+                    </div>
+        
+                    <!-- Labels Outside -->
+                    <div style="position: absolute; top: -25px; left: 35%; font-weight: bold;">$a$</div>
+                    <div style="position: absolute; top: -25px; right: 15%; font-weight: bold;">$b$</div>
+                    <div style="position: absolute; left: -25px; top: 35%; font-weight: bold;">$a$</div>
+                    <div style="position: absolute; left: -25px; bottom: 15%; font-weight: bold;">$b$</div>
+                </div>
+        
+                <!-- The Explanation -->
+                <div style="max-width: 400px;">
+                    <div class="highlight-box">
+                        <strong>Logika Visual:</strong><br>
+                        Luas Persegi Besar = Sisi $\times$ Sisi<br>
+                        $(a+b) \times (a+b)$ <br><br>
+                        Terdiri dari 4 bagian:<br>
+                        1. Persegi Besar ($a^2$)<br>
+                        2. Persegi Kecil ($b^2$)<br>
+                        3. Dua Persegi Panjang Identik ($ab + ab = 2ab$)<br><br>
+                        <strong>Kesimpulan:</strong> $(a+b)^2 = a^2 + 2ab + b^2$
+                    </div>
+                </div>
+            </div>
+        
+            <!-- 2. BAR MODEL TO ALGEBRA -->
+            <h3>2. Dari Bar Model ke Persamaan Linear</h3>
+            <div class="comparison-table">
+                <table style="width:100%">
+                    <tr>
+                        <th style="background-color: #3b82f6;">Pictorial (SD - Singapore Math)</th>
+                        <th style="background-color: #f59e0b;">Abstract (SMP - Algebra)</th>
+                    </tr>
+                    <tr>
+                        <td style="background: #eff6ff;">
+                            <!-- Simple CSS Bar Model -->
+                            <p style="font-size:0.8rem; margin-bottom:5px;">Soal: 3 kotak ditambah 5 hasilnya 20.</p>
+                            <div style="display:flex; align-items:center; gap:2px;">
+                                <div style="background:#3b82f6; width:40px; height:30px; border:1px solid #1d4ed8;"></div>
+                                <div style="background:#3b82f6; width:40px; height:30px; border:1px solid #1d4ed8;"></div>
+                                <div style="background:#3b82f6; width:40px; height:30px; border:1px solid #1d4ed8;"></div>
+                                <div style="background:#fbbf24; width:30px; height:30px; border:1px solid #d97706; display:flex; align-items:center; justify-content:center; font-weight:bold;">5</div>
+                            </div>
+                            <div style="border-top: 2px solid #000; margin-top:5px; width: 156px; text-align:center;">
+                                <span style="background:white; padding:0 5px; position:relative; top:-12px;">20</span>
+                            </div>
+                        </td>
+                        <td style="background: #fffbeb;">
+                            <p style="font-size:0.8rem; margin-bottom:5px;">Terjemahan ke Simbol:</p>
+                            <p style="font-family: 'Times New Roman', serif; font-size: 1.2rem;">
+                                Misalkan kotak = $x$ <br>
+                                $$3x + 5 = 20$$
+                            </p>
+                            <p style="font-size:0.8rem; color:#64748b;">
+                                Siswa harus melihat bahwa $3x$ adalah 3 balok fisik, bukan sekadar angka.
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        
+            <!-- 3. DISTRIBUTIVE PROPERTY TRAP -->
+            <h3>3. Jebakan Distribusi (The Rainbow Method)</h3>
+            <p>Kesalahan umum siswa: $3(x + 5) = 3x + 5$. Mereka lupa mengalikan bagian belakang.</p>
+            
             <div class="quiz-container">
                 <div class="quiz-box">
-                    <strong>Common Mistake:</strong><br>
-                    $(a+b)^2 = a^2 + b^2$<br>
-                    <span style="color:red">SALAH BESAR!</span>
+                    <div class="quiz-question">Studi Kasus: Mengapa -3(x - 4) sering salah?</div>
+                    <div class="script-text">
+                        <strong>Siswa Menjawab:</strong> $-3x - 12$ <br>
+                        <strong>Kesalahan:</strong> Tanda negatif di -4 sering terabaikan saat dikalikan dengan -3.
+                    </div>
+                    <div class="correct-answer">
+                        <strong>Perbaikan Konsep:</strong><br>
+                        Anggap tanda negatif sebagai "milik" angka di belakangnya.<br>
+                        $(-3) \times (x)$ ditambah $(-3) \times (-4)$.<br>
+                        Hasil: $-3x + 12$.
+                    </div>
                 </div>
+                
                 <div class="quiz-box">
-                    <strong>Correction Strategy:</strong><br>
-                    Gunakan luas persegi. Sisi $(a+b)$.<br>
-                    Jadi: $a^2 + 2ab + b^2$.
+                    <div class="quiz-question">Konsep "Zero Pairs" (Bilangan Bulat)</div>
+                    <p style="font-size: 0.9rem;">Bagaimana menjelaskan $(-2) + 5$ ke anak yang bingung?</p>
+                    <ul class="quiz-options">
+                        <li>A. Hutang 2 dibayar 5.</li>
+                        <li>B. Garis bilangan (Mundur 2, Maju 5).</li>
+                        <li>C. Keping warna (2 Merah + 5 Biru). Pasangan Merah-Biru jadi Nol.</li>
+                    </ul>
+                    <div class="correct-answer">
+                        <strong>Rekomendasi CPA: C (Keping Warna/Zero Pairs)</strong>.<br>
+                        Ini adalah metode paling visual untuk menjelaskan kenapa sisa 3 positif.
+                    </div>
                 </div>
+            </div>
+            
+            <div class="alert-box">
+                🎓 <strong>Teacher Tip:</strong> Jangan pernah bilang "Pindah ruas ganti tanda". Itu mengajarkan 'sihir', bukan matematika. Katakan "Kedua ruas dikurangi angka yang sama" (Balance Method).
             </div>
         </div>
 
