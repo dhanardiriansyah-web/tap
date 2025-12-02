@@ -767,23 +767,141 @@
             </div>
         </div>
 
-        <!-- TAB: SESI 2 (BIG PICTURE) -->
+        <!-- TAB: SESI 2 (BIG PICTURE) - ELABORASI LENGKAP -->
         <div id="sesi2" class="content-section">
             <div class="header-row">
-                <h2>Sesi 2: Big Picture & Singapore Math</h2>
+                <h2>Sesi 2: Singapore Math Fundamentals</h2>
+                <div class="page-logos">
+                    <!-- Icon Lego/Blocks representatif -->
+                    <span style="font-size: 2rem;">🧱</span>
+                </div>
             </div>
-            <p><strong>Fokus:</strong> Memahami kurikulum spiral. Matematika bukan kumpulan bab terpisah, tapi cerita bersambung.</p>
+            
             <div class="elaborate-box">
-                <div class="elaborate-title">🧠 The CPA Approach (Singapore Math)</div>
-                <p>Kita menggunakan framework ini untuk menjelaskan konsep abstrak:</p>
-                <ul>
-                    <li><strong>Concrete (Nyata):</strong> Menggunakan benda fisik (kancing, blok, uang mainan).</li>
-                    <li><strong>Pictorial (Gambar):</strong> Menggunakan <strong>Bar Model</strong> (Model Batang) atau Number Bond.</li>
-                    <li><strong>Abstract (Simbol):</strong> Menggunakan angka dan notasi matematika ($3 + x = 5$).</li>
-                </ul>
+                <div class="elaborate-title">🧠 The CPA Approach (The "Secret Sauce")</div>
+                <p>
+                    Matematika seringkali "menyakitkan" karena terlalu cepat melompat ke abstrak.
+                    Singapore Math memaksa kita untuk melewati 3 fase evolusi pemahaman (Jerome Bruner):
+                </p>
+                
+                <div class="comparison-table" style="margin-top:15px;">
+                    <table style="width:100%;">
+                        <tr>
+                            <th style="background:#16a34a; width:33%;">Concrete</th>
+                            <th style="background:#2563eb; width:33%;">Pictorial</th>
+                            <th style="background:#db2777; width:33%;">Abstract</th>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center; background:#f0fdf4;">
+                                <div style="font-size:2rem;">🍎🍎</div>
+                                <div style="font-size:0.8rem; margin-top:5px;">Real Objects<br>(Apel, Balok, Kancing)</div>
+                            </td>
+                            <td style="text-align:center; background:#eff6ff;">
+                                <div style="display:flex; justify-content:center; gap:5px; margin-top:10px;">
+                                    <div style="width:20px; height:20px; border:1px solid #2563eb; background:#bfdbfe;"></div>
+                                    <div style="width:20px; height:20px; border:1px solid #2563eb; background:#bfdbfe;"></div>
+                                </div>
+                                <div style="font-size:0.8rem; margin-top:5px;">Drawing/Diagram<br>(Bar Model, Circles)</div>
+                            </td>
+                            <td style="text-align:center; background:#fdf2f8;">
+                                <div style="font-size:1.5rem; font-weight:800; color:#db2777;">1 + 1 = 2</div>
+                                <div style="font-size:0.8rem; margin-top:5px;">Symbols<br>(Angka & Notasi)</div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
-            <h3>Bar Model Workshop</h3>
-            <p>Guru dilatih menyelesaikan soal cerita kompleks (Word Problems) menggunakan Bar Model sebelum menggunakan Aljabar.</p>
+
+            <!-- 1. NUMBER BONDS -->
+            <h3>1. Number Bonds: Beyond "Storage" Math</h3>
+            <p>
+                Sebelum anak menghafal $7 + 3 = 10$, mereka harus punya <em>number sense</em> bahwa 10 itu bisa dipecah.
+            </p>
+
+            <div style="background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:20px; display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:40px;">
+                <!-- CSS Visual for Number Bond -->
+                <div style="position:relative; width:160px; height:140px;">
+                    <!-- Whole -->
+                    <div style="position:absolute; top:0; left:50px; width:60px; height:60px; border-radius:50%; border:3px solid #334155; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.5rem; background:#f1f5f9; z-index:2;">10</div>
+                    <!-- Part 1 -->
+                    <div style="position:absolute; bottom:0; left:0; width:50px; height:50px; border-radius:50%; border:3px solid #3b82f6; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1.2rem; background:#eff6ff; z-index:2;">7</div>
+                    <!-- Part 2 -->
+                    <div style="position:absolute; bottom:0; right:0; width:50px; height:50px; border-radius:50%; border:3px solid #3b82f6; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1.2rem; background:#eff6ff; z-index:2;">3</div>
+                    
+                    <!-- Lines -->
+                    <div style="position:absolute; top:45px; left:40px; width:30px; height:40px; border-left:3px solid #cbd5e1; transform:rotate(25deg);"></div>
+                    <div style="position:absolute; top:45px; right:40px; width:30px; height:40px; border-right:3px solid #cbd5e1; transform:rotate(-25deg);"></div>
+                </div>
+
+                <div style="max-width:400px;">
+                    <h4 style="margin-top:0; color:#0f172a;">Mengapa ini penting?</h4>
+                    <p style="font-size:0.9rem;">
+                        Ini dasar dari mental aritmatika.
+                        <br>Saat menghitung $9 + 5$, otak anak Number Bond akan berpikir:
+                        <br>$9 + (1 + 4) \to (9+1) + 4 \to 10 + 4 = 14$.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 2. BAR MODEL -->
+            <h3>2. Bar Model Workshop (Senjata Rahasia)</h3>
+            <p>Mengubah soal cerita rumit menjadi gambar kotak sederhana.</p>
+
+            <div class="comparison-table">
+                <table style="width:100%">
+                    <tr>
+                        <th style="background-color: #f59e0b;">Part-Whole Model</th>
+                        <th style="background-color: #8b5cf6;">Comparison Model</th>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align:top; background:#fffbeb;">
+                            <p style="font-size:0.85rem; font-weight:bold;">Kasus: Penjumlahan/Pengurangan</p>
+                            <p style="font-size:0.8rem; margin-bottom:10px;">"Ada 20 apel merah dan hijau. 15 merah. Berapa hijau?"</p>
+                            
+                            <!-- Visual Bar Part-Whole -->
+                            <div style="border:2px solid #334155; height:40px; width:100%; display:flex;">
+                                <div style="width:75%; background:#fca5a5; border-right:2px solid #334155; display:flex; align-items:center; justify-content:center; font-size:0.8rem;">15</div>
+                                <div style="width:25%; background:#bbf7d0; display:flex; align-items:center; justify-content:center; font-size:0.8rem;">?</div>
+                            </div>
+                            <!-- Bracket Total -->
+                            <div style="border-left:1px solid #000; border-right:1px solid #000; border-bottom:1px solid #000; height:10px; margin-top:5px; width:100%; position:relative;">
+                                <span style="position:absolute; bottom:-20px; left:50%; transform:translateX(-50%); font-size:0.8rem; font-weight:bold;">20</span>
+                            </div>
+                        </td>
+                        <td style="vertical-align:top; background:#f5f3ff;">
+                            <p style="font-size:0.85rem; font-weight:bold;">Kasus: Selisih/Perbandingan</p>
+                            <p style="font-size:0.8rem; margin-bottom:10px;">"Budi punya 3x lipat uang Ani. Selisih uang mereka Rp 10.000."</p>
+                            
+                            <!-- Visual Bar Comparison -->
+                            <div style="display:flex; flex-direction:column; gap:5px; align-items:flex-start;">
+                                <!-- Ani -->
+                                <div style="display:flex; align-items:center;">
+                                    <span style="font-size:0.7rem; width:30px;">Ani</span>
+                                    <div style="width:40px; height:30px; border:2px solid #334155; background:#ddd;"></div>
+                                </div>
+                                <!-- Budi -->
+                                <div style="display:flex; align-items:center;">
+                                    <span style="font-size:0.7rem; width:30px;">Budi</span>
+                                    <div style="display:flex;">
+                                        <div style="width:40px; height:30px; border:2px solid #334155; background:#ddd; border-right:none;"></div>
+                                        <div style="width:40px; height:30px; border:2px solid #334155; background:#ddd; border-right:none;"></div>
+                                        <div style="width:40px; height:30px; border:2px solid #334155; background:#ddd;"></div>
+                                    </div>
+                                </div>
+                                <!-- Difference Bracket -->
+                                <div style="margin-left:75px; position:relative; width:80px; margin-top:-25px;">
+                                    <div style="border-bottom:2px solid #ef4444; width:100%;"></div>
+                                    <div style="color:#ef4444; font-size:0.75rem; text-align:center; font-weight:bold; margin-top:2px;">10.000 (2 Unit)</div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="highlight-box">
+                🎯 <strong>Goal Sesi Ini:</strong> Guru berhenti mengajar dengan cara "Hafalan Kata Kunci" (e.g. <em>"Kalau ada kata 'sisa', berarti dikurang"</em>). Sebaliknya, ajarkan <strong>menggambar struktur masalah</strong>.
+            </div>
         </div>
 
         <!-- TAB: SESI 3 (SMP) - ELABORASI LENGKAP -->
@@ -932,17 +1050,107 @@
             </div>
         </div>
 
-        <!-- TAB: SESI 4 (SMA) -->
+        <!-- TAB: SESI 4 (SMA) - ELABORASI LENGKAP -->
         <div id="sesi4" class="content-section">
             <div class="header-row">
-                <h2>Sesi 4: Matematika SMA</h2>
+                <h2>Sesi 4: Matematika SMA (Abstraksi & Intuition)</h2>
+                <div class="page-logos">
+                    <!-- Icon Kurva -->
+                    <span style="font-size: 2rem;">📈</span>
+                </div>
             </div>
-            <p><strong>Fokus:</strong> Abstraksi tingkat tinggi. Kalkulus dan Trigonometri.</p>
-            <h3>1. The Calculus Bridge</h3>
-            <p>Bangun intuisi: Limit $\to$ Turunan (Gradien) $\to$ Integral (Luas).</p>
-            <h3>2. Trigonometri</h3>
-            <div class="highlight-box">
-                Hafalan Trigonometri sudut istimewa menyiksa. Ajarkan pakai <strong>Lingkaran Satuan (Unit Circle)</strong>.
+            
+            <div class="elaborate-box">
+                <div class="elaborate-title">🚀 From Formula to Function</div>
+                <p>
+                    Di SMA, matematika menjadi sangat abstrak. Tugas guru adalah <strong>mengembalikan intuisi</strong> yang hilang.
+                    Jangan biarkan siswa menghafal rumus turunan $nx^{n-1}$ tanpa mengerti bahwa itu adalah <em>perubahan instan</em>.
+                </p>
+            </div>
+
+            <!-- 1. TRIGONOMETRI VISUAL -->
+            <h3>1. Trigonometri: Stop Menghafal Tabel!</h3>
+            <p>Siswa sering "muntah" melihat tabel sin/cos/tan sudut istimewa. Solusinya: <strong>Unit Circle Logic</strong>.</p>
+            
+            <div style="display:flex; flex-wrap:wrap; gap:30px; align-items:center; justify-content:center; margin:20px 0;">
+                <!-- CSS Unit Circle -->
+                <div style="position:relative; width:200px; height:200px; border:2px solid #334155; border-radius:50%; background:#f8fafc;">
+                    <!-- Axis -->
+                    <div style="position:absolute; top:50%; left:0; width:100%; height:1px; background:#94a3b8;"></div> <!-- X-axis -->
+                    <div style="position:absolute; left:50%; top:0; width:1px; height:100%; background:#94a3b8;"></div> <!-- Y-axis -->
+                    
+                    <!-- Triangle in Quad 1 -->
+                    <div style="position:absolute; top:50%; left:50%; width:70px; height:2px; background:#2563eb; transform-origin:left center; transform:rotate(-45deg);"></div> <!-- Radius (Hypotenuse) -->
+                    <div style="position:absolute; top:50%; left:50%; width:50px; height:2px; background:#16a34a; transform-origin:left center;"></div> <!-- Cos (X) -->
+                    <div style="position:absolute; top:calc(50% - 50px); left:calc(50% + 50px); width:2px; height:50px; background:#ef4444;"></div> <!-- Sin (Y) -->
+                    
+                    <!-- Labels -->
+                    <div style="position:absolute; top:40%; right:15%; color:#ef4444; font-size:0.7rem; font-weight:bold;">Sin (y)</div>
+                    <div style="position:absolute; top:55%; right:25%; color:#16a34a; font-size:0.7rem; font-weight:bold;">Cos (x)</div>
+                </div>
+
+                <div style="max-width:350px;">
+                    <div class="highlight-box">
+                        <strong>Logika Unit Circle:</strong>
+                        <ul style="margin:0; padding-left:15px; font-size:0.9rem;">
+                            <li>Jari-jari selalu 1 (Hipotenusa).</li>
+                            <li><strong>Sinus</strong> = Tinggi (Sumbu Y).</li>
+                            <li><strong>Cosinus</strong> = Alas (Sumbu X).</li>
+                        </ul>
+                        <p style="font-size:0.9rem; margin-top:10px;">
+                            <em>Contoh:</em> Saat sudut 90° (tegak lurus ke atas):<br>
+                            Tingginya maks (Sin 90 = 1).<br>
+                            Alasnya habis (Cos 90 = 0).<br>
+                            <strong>Tanpa hafal, cukup bayangkan.</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. CALCULUS INTUITION -->
+            <h3>2. Calculus Intuition: Limit & Turunan</h3>
+            <p>Limit bukan "memasukkan angka", tapi "mendekati".</p>
+            
+            <div class="comparison-table">
+                <table style="width:100%">
+                    <tr>
+                        <th style="background-color: #475569;">Kesalahan Guru</th>
+                        <th style="background-color: #2563eb;">Pendekatan Intuisi</th>
+                    </tr>
+                    <tr>
+                        <td style="background:#f1f5f9; font-size:0.9rem;">
+                            Langsung memberikan rumus:<br>
+                            $f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}$<br>
+                            (Siswa pusing, $h$ itu apa?)
+                        </td>
+                        <td style="background:#eff6ff; font-size:0.9rem;">
+                            Gunakan analogi <strong>Zoom In</strong> kamera.<br>
+                            1. Kurva itu melengkung.<br>
+                            2. Jika kita zoom in sangat dekat di satu titik...<br>
+                            3. Kurva itu akan terlihat <strong>LURUS</strong>.<br>
+                            4. Kemiringan garis lurus itulah Turunan.
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- 3. FUNCTION TRANSFORMATION -->
+            <h3>3. Function Transformation (Menggeser Grafik)</h3>
+            <div class="quiz-container">
+                <div class="quiz-box">
+                    <div class="quiz-question">Jika $f(x) = x^2$ digeser ke KANAN sejauh 3 satuan, rumusnya menjadi...</div>
+                    <ul class="quiz-options">
+                        <li>A. $f(x) = x^2 + 3$</li>
+                        <li>B. $f(x) = (x + 3)^2$</li>
+                        <li>C. $f(x) = (x - 3)^2$</li>
+                    </ul>
+                    <div class="correct-answer">
+                        <strong>Kunci: C ($x - 3$)</strong>.<br>
+                        <em>Logika Kontraintuitif:</em> <br>
+                        Untuk mendapatkan nilai $y$ yang sama di $x=0$ (awal), input baru harus dikurangi 3 agar "kembali" ke 0.
+                        <br>Geser Kanan $\to$ Kurang.<br>Geser Kiri $\to$ Tambah.
+                    </div>
+                </div>
             </div>
         </div>
 
