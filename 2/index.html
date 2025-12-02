@@ -767,7 +767,7 @@
             </div>
         </div>
 
-        <!-- TAB: SESI 2 (BIG PICTURE) - ELABORASI LENGKAP -->
+        <!-- TAB: SESI 2 (BIG PICTURE) - UI IMPROVED -->
         <div id="sesi2" class="content-section">
             <div class="header-row">
                 <h2>Sesi 2: Singapore Math Fundamentals</h2>
@@ -872,7 +872,7 @@
                             <p style="font-size:0.85rem; font-weight:bold;">Kasus: Selisih/Perbandingan</p>
                             <p style="font-size:0.8rem; margin-bottom:10px;">"Budi punya 3x lipat uang Ani. Selisih uang mereka Rp 10.000."</p>
                             
-                            <!-- Visual Bar Comparison -->
+                            <!-- Visual Bar Comparison (FIXED ALIGNMENT) -->
                             <div style="display:flex; flex-direction:column; gap:5px; align-items:flex-start;">
                                 <!-- Ani -->
                                 <div style="display:flex; align-items:center;">
@@ -880,20 +880,23 @@
                                     <div style="width:40px; height:30px; border:2px solid #334155; background:#ddd;"></div>
                                 </div>
                                 <!-- Budi -->
-                                <div style="display:flex; align-items:center;">
+                                <div style="display:flex; align-items:center; position:relative;">
                                     <span style="font-size:0.7rem; width:30px;">Budi</span>
                                     <div style="display:flex;">
                                         <div style="width:40px; height:30px; border:2px solid #334155; background:#ddd; border-right:none;"></div>
-                                        <div style="width:40px; height:30px; border:2px solid #334155; background:#ddd; border-right:none;"></div>
-                                        <div style="width:40px; height:30px; border:2px solid #334155; background:#ddd;"></div>
+                                        <!-- Highlighted Difference Part -->
+                                        <div style="display:flex; position:relative;">
+                                            <div style="width:40px; height:30px; border:2px solid #334155; background:#fee2e2; border-right:none;"></div>
+                                            <div style="width:40px; height:30px; border:2px solid #334155; background:#fee2e2;"></div>
+                                            
+                                            <!-- The Bracket strictly under the 2 extra blocks -->
+                                            <div style="position:absolute; bottom:-15px; left:0; width:100%; border-bottom:2px solid #ef4444; height:5px; border-left:1px solid #ef4444; border-right:1px solid #ef4444;"></div>
+                                            <div style="position:absolute; bottom:-35px; width:100%; text-align:center; color:#ef4444; font-size:0.7rem; font-weight:bold; line-height:1.2;">10k<br>(2 Unit)</div>
+                                        </div>
                                     </div>
                                 </div>
-                                <!-- Difference Bracket -->
-                                <div style="margin-left:75px; position:relative; width:80px; margin-top:-25px;">
-                                    <div style="border-bottom:2px solid #ef4444; width:100%;"></div>
-                                    <div style="color:#ef4444; font-size:0.75rem; text-align:center; font-weight:bold; margin-top:2px;">10.000 (2 Unit)</div>
-                                </div>
                             </div>
+                            <div style="height:30px;"></div> <!-- Spacer for bracket text -->
                         </td>
                     </tr>
                 </table>
@@ -904,7 +907,7 @@
             </div>
         </div>
 
-        <!-- TAB: SESI 3 (SMP) - ELABORASI LENGKAP -->
+        <!-- TAB: SESI 3 (SMP) -->
         <div id="sesi3" class="content-section">
             <div class="header-row">
                 <h2>Sesi 3: Matematika SMP (The Great Transition)</h2>
@@ -1050,10 +1053,10 @@
             </div>
         </div>
 
-        <!-- TAB: SESI 4 (SMA) - ELABORASI LENGKAP -->
+        <!-- TAB: SESI 4 (SMA) - ELABORASI DETAIL & DEEP -->
         <div id="sesi4" class="content-section">
             <div class="header-row">
-                <h2>Sesi 4: Matematika SMA (Abstraksi & Intuition)</h2>
+                <h2>Sesi 4: Matematika SMA (The Art of Abstraction)</h2>
                 <div class="page-logos">
                     <!-- Icon Kurva -->
                     <span style="font-size: 2rem;">📈</span>
@@ -1061,94 +1064,142 @@
             </div>
             
             <div class="elaborate-box">
-                <div class="elaborate-title">🚀 From Formula to Function</div>
+                <div class="elaborate-title">🚀 From Formula to Intuition</div>
                 <p>
-                    Di SMA, matematika menjadi sangat abstrak. Tugas guru adalah <strong>mengembalikan intuisi</strong> yang hilang.
-                    Jangan biarkan siswa menghafal rumus turunan $nx^{n-1}$ tanpa mengerti bahwa itu adalah <em>perubahan instan</em>.
+                    Matematika SMA bukan sekadar menghafal rumus, melainkan memahami <strong>perubahan</strong> (Kalkulus) dan <strong>pola</strong> (Trigonometri & Fungsi).
+                    Tantangan utama guru: Mengubah "Hafalan Mati" menjadi "Nalar Hidup".
                 </p>
             </div>
 
-            <!-- 1. TRIGONOMETRI VISUAL -->
-            <h3>1. Trigonometri: Stop Menghafal Tabel!</h3>
-            <p>Siswa sering "muntah" melihat tabel sin/cos/tan sudut istimewa. Solusinya: <strong>Unit Circle Logic</strong>.</p>
+            <!-- 1. CALCULUS INTUITION -->
+            <h3>1. Kalkulus: Memahami "Ketakterhinggaan"</h3>
+            <p>Jangan langsung masuk ke rumus $nx^{n-1}$! Mulailah dari masalah nyata.</p>
             
-            <div style="display:flex; flex-wrap:wrap; gap:30px; align-items:center; justify-content:center; margin:20px 0;">
-                <!-- CSS Unit Circle -->
-                <div style="position:relative; width:200px; height:200px; border:2px solid #334155; border-radius:50%; background:#f8fafc;">
-                    <!-- Axis -->
-                    <div style="position:absolute; top:50%; left:0; width:100%; height:1px; background:#94a3b8;"></div> <!-- X-axis -->
-                    <div style="position:absolute; left:50%; top:0; width:1px; height:100%; background:#94a3b8;"></div> <!-- Y-axis -->
-                    
-                    <!-- Triangle in Quad 1 -->
-                    <div style="position:absolute; top:50%; left:50%; width:70px; height:2px; background:#2563eb; transform-origin:left center; transform:rotate(-45deg);"></div> <!-- Radius (Hypotenuse) -->
-                    <div style="position:absolute; top:50%; left:50%; width:50px; height:2px; background:#16a34a; transform-origin:left center;"></div> <!-- Cos (X) -->
-                    <div style="position:absolute; top:calc(50% - 50px); left:calc(50% + 50px); width:2px; height:50px; background:#ef4444;"></div> <!-- Sin (Y) -->
-                    
-                    <!-- Labels -->
-                    <div style="position:absolute; top:40%; right:15%; color:#ef4444; font-size:0.7rem; font-weight:bold;">Sin (y)</div>
-                    <div style="position:absolute; top:55%; right:25%; color:#16a34a; font-size:0.7rem; font-weight:bold;">Cos (x)</div>
+            <div class="quiz-container">
+                <!-- Limit Intuition -->
+                <div class="quiz-box">
+                    <div class="quiz-question">The Tangent Problem (Turunan)</div>
+                    <p style="font-size:0.9rem; color:#64748b;">
+                        Bagaimana menghitung kecepatan sesaat (speedometer) padahal kita butuh 2 titik untuk menghitung jarak/waktu?
+                    </p>
+                    <!-- Visual Zoom -->
+                    <div style="display:flex; align-items:center; gap:10px; margin:15px 0;">
+                        <!-- Curve -->
+                        <div style="width:100px; height:80px; border-left:2px solid #334155; border-bottom:2px solid #334155; position:relative;">
+                            <div style="position:absolute; bottom:0; left:0; width:100%; height:100%; border-radius: 0 0 0 100%; border-bottom:3px solid #2563eb; transform: rotate(-15deg); transform-origin: bottom left;"></div>
+                            <!-- Secant Line -->
+                            <div style="position:absolute; bottom:10px; left:10px; width:80px; height:2px; background:#ef4444; transform: rotate(-35deg); transform-origin: left center;"></div>
+                        </div>
+                        <div style="font-size:1.5rem;">→</div>
+                        <!-- Zoomed Tangent -->
+                        <div style="width:100px; height:80px; border:1px dashed #cbd5e1; display:flex; align-items:center; justify-content:center; background:#f8fafc;">
+                            <div style="width:80%; height:2px; background:#2563eb; transform:rotate(-45deg);"></div>
+                        </div>
+                    </div>
+                    <div class="correct-answer">
+                        <strong>Intuisi:</strong> "Zoom In" terus menerus.
+                        <br>Garis lengkung, jika di-zoom cukup dekat, akan terlihat <strong>LURUS</strong>. Kemiringan garis lurus itulah Turunan.
+                    </div>
                 </div>
 
-                <div style="max-width:350px;">
-                    <div class="highlight-box">
-                        <strong>Logika Unit Circle:</strong>
-                        <ul style="margin:0; padding-left:15px; font-size:0.9rem;">
-                            <li>Jari-jari selalu 1 (Hipotenusa).</li>
-                            <li><strong>Sinus</strong> = Tinggi (Sumbu Y).</li>
-                            <li><strong>Cosinus</strong> = Alas (Sumbu X).</li>
-                        </ul>
-                        <p style="font-size:0.9rem; margin-top:10px;">
-                            <em>Contoh:</em> Saat sudut 90° (tegak lurus ke atas):<br>
-                            Tingginya maks (Sin 90 = 1).<br>
-                            Alasnya habis (Cos 90 = 0).<br>
-                            <strong>Tanpa hafal, cukup bayangkan.</strong>
-                        </p>
+                <!-- Integral Intuition -->
+                <div class="quiz-box">
+                    <div class="quiz-question">The Area Problem (Integral)</div>
+                    <p style="font-size:0.9rem; color:#64748b;">
+                        Bagaimana menghitung luas daerah yang tidak beraturan?
+                    </p>
+                    <!-- Visual Riemann -->
+                    <div style="display:flex; align-items:end; gap:2px; height:80px; border-bottom:2px solid #334155; margin:15px 0; padding-bottom:1px;">
+                        <div style="width:15px; height:20%; background:#bbf7d0; border:1px solid #16a34a;"></div>
+                        <div style="width:15px; height:35%; background:#bbf7d0; border:1px solid #16a34a;"></div>
+                        <div style="width:15px; height:50%; background:#bbf7d0; border:1px solid #16a34a;"></div>
+                        <div style="width:15px; height:75%; background:#bbf7d0; border:1px solid #16a34a;"></div>
+                        <div style="width:15px; height:90%; background:#bbf7d0; border:1px solid #16a34a;"></div>
+                    </div>
+                    <div class="correct-answer">
+                        <strong>Intuisi:</strong> Potong-potong jadi persegi panjang kecil (Riemann Sum).
+                        <br>Semakin tipis potongannya, semakin akurat luasnya. $\sum \to \int$.
                     </div>
                 </div>
             </div>
 
-            <!-- 2. CALCULUS INTUITION -->
-            <h3>2. Calculus Intuition: Limit & Turunan</h3>
-            <p>Limit bukan "memasukkan angka", tapi "mendekati".</p>
+            <!-- 2. TRIGONOMETRI VISUAL -->
+            <h3>2. Trigonometri: Unit Circle Mastery</h3>
+            <p>Hentikan kebiasaan menghafal tabel tanpa konteks. Gunakan <strong>Unit Circle</strong> dan jembatan keledai yang cerdas.</p>
             
-            <div class="comparison-table">
-                <table style="width:100%">
-                    <tr>
-                        <th style="background-color: #475569;">Kesalahan Guru</th>
-                        <th style="background-color: #2563eb;">Pendekatan Intuisi</th>
-                    </tr>
-                    <tr>
-                        <td style="background:#f1f5f9; font-size:0.9rem;">
-                            Langsung memberikan rumus:<br>
-                            $f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}$<br>
-                            (Siswa pusing, $h$ itu apa?)
-                        </td>
-                        <td style="background:#eff6ff; font-size:0.9rem;">
-                            Gunakan analogi <strong>Zoom In</strong> kamera.<br>
-                            1. Kurva itu melengkung.<br>
-                            2. Jika kita zoom in sangat dekat di satu titik...<br>
-                            3. Kurva itu akan terlihat <strong>LURUS</strong>.<br>
-                            4. Kemiringan garis lurus itulah Turunan.
-                        </td>
-                    </tr>
-                </table>
+            <div style="display:flex; flex-wrap:wrap; gap:30px; align-items:center; justify-content:center; margin:20px 0; background:#fff; padding:20px; border-radius:12px; border:1px solid #e2e8f0;">
+                <!-- CSS Unit Circle with Quadrants -->
+                <div style="position:relative; width:220px; height:220px;">
+                    <div style="width:200px; height:200px; border:2px solid #334155; border-radius:50%; position:relative; margin:10px;">
+                        <!-- Axes -->
+                        <div style="position:absolute; top:50%; width:100%; height:1px; background:#94a3b8;"></div>
+                        <div style="position:absolute; left:50%; height:100%; width:1px; background:#94a3b8;"></div>
+                        
+                        <!-- Quadrant Labels (ASTC) -->
+                        <div style="position:absolute; top:25%; right:25%; color:#16a34a; font-weight:bold;">A (All)</div>
+                        <div style="position:absolute; top:25%; left:25%; color:#f59e0b; font-weight:bold;">S (Sin)</div>
+                        <div style="position:absolute; bottom:25%; left:25%; color:#ef4444; font-weight:bold;">T (Tan)</div>
+                        <div style="position:absolute; bottom:25%; right:25%; color:#2563eb; font-weight:bold;">C (Cos)</div>
+                        
+                        <!-- Triangle Example -->
+                        <div style="position:absolute; top:50%; left:50%; width:70px; height:2px; background:#334155; transform-origin:left center; transform:rotate(-60deg);"></div>
+                        <div style="position:absolute; top:calc(50% - 60px); left:calc(50% + 35px); width:2px; height:60px; background:#f59e0b;"></div> <!-- Sin -->
+                        <div style="position:absolute; top:50%; left:50%; width:35px; height:2px; background:#2563eb;"></div> <!-- Cos -->
+                    </div>
+                </div>
+
+                <div style="max-width:350px;">
+                    <div class="highlight-box">
+                        <strong>Logika Kuadran (ASTC Rule):</strong><br>
+                        "<strong>A</strong>ll <strong>S</strong>tudents <strong>T</strong>ake <strong>C</strong>alculus"
+                        <ul style="margin:0; padding-left:15px; font-size:0.9rem; margin-top:5px;">
+                            <li><strong>K1 (All):</strong> Semua positif (x kanan, y atas).</li>
+                            <li><strong>K2 (Sin):</strong> Cuma Sin positif (y atas).</li>
+                            <li><strong>K3 (Tan):</strong> Cuma Tan positif (x kiri, y bawah).</li>
+                            <li><strong>K4 (Cos):</strong> Cuma Cos positif (x kanan).</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
             <!-- 3. FUNCTION TRANSFORMATION -->
-            <h3>3. Function Transformation (Menggeser Grafik)</h3>
+            <h3>3. Function Transformation (Visualizing Shifts)</h3>
             <div class="quiz-container">
                 <div class="quiz-box">
-                    <div class="quiz-question">Jika $f(x) = x^2$ digeser ke KANAN sejauh 3 satuan, rumusnya menjadi...</div>
+                    <div class="quiz-question">Visual: Mengapa $f(x-3)$ geser ke KANAN?</div>
+                    
+                    <!-- Graph Comparison -->
+                    <div style="position:relative; width:100%; height:100px; border-bottom:1px solid #334155; border-left:1px solid #334155; margin-bottom:10px;">
+                        <!-- Original Parabola (Center) -->
+                        <svg width="100%" height="100%" viewBox="-100 0 200 100" preserveAspectRatio="none">
+                            <!-- f(x) = x^2 -->
+                            <path d="M -30 0 Q 0 100 30 0" stroke="#94a3b8" fill="none" stroke-width="2" />
+                            <!-- f(x-3) shifted right -->
+                            <path d="M 20 0 Q 50 100 80 0" stroke="#2563eb" fill="none" stroke-width="2" />
+                        </svg>
+                        <div style="position:absolute; top:10px; left:45%; color:#94a3b8; font-size:0.7rem;">$x^2$</div>
+                        <div style="position:absolute; top:10px; right:20%; color:#2563eb; font-size:0.7rem;">$(x-3)^2$</div>
+                    </div>
+                    
+                    <div class="correct-answer">
+                        <strong>Logika "Waktu":</strong>
+                        <br>Anggap $x$ adalah waktu. $(x-3)$ artinya "terlambat 3 detik".
+                        <br>Kejadian yang harusnya terjadi di detik ke-0 (puncak), baru terjadi di detik ke-3. Makanya grafiknya bergeser ke kanan (masa depan).
+                    </div>
+                </div>
+                
+                <div class="quiz-box">
+                    <div class="quiz-question">Komposisi Fungsi</div>
+                    <p style="font-size:0.9rem;">Analogi terbaik untuk $f(g(x))$?</p>
                     <ul class="quiz-options">
-                        <li>A. $f(x) = x^2 + 3$</li>
-                        <li>B. $f(x) = (x + 3)^2$</li>
-                        <li>C. $f(x) = (x - 3)^2$</li>
+                        <li>A. Menjumlahkan dua mesin.</li>
+                        <li>B. Mesin di dalam mesin (Input masuk g, output g masuk f).</li>
+                        <li>C. Mengalikan dua hasil.</li>
                     </ul>
                     <div class="correct-answer">
-                        <strong>Kunci: C ($x - 3$)</strong>.<br>
-                        <em>Logika Kontraintuitif:</em> <br>
-                        Untuk mendapatkan nilai $y$ yang sama di $x=0$ (awal), input baru harus dikurangi 3 agar "kembali" ke 0.
-                        <br>Geser Kanan $\to$ Kurang.<br>Geser Kiri $\to$ Tambah.
+                        <strong>Kunci: B</strong>.
+                        <br>Seperti "Pabrik Roti":
+                        <br>$x$ (Gandum) $\to$ Mesin g (Jadi Tepung) $\to$ Mesin f (Jadi Roti).
                     </div>
                 </div>
             </div>
