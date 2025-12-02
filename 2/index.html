@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Lesson Plan - Math Teacher Training</title>
+    
+    <!-- MathJax for Rendering Math Formulas -->
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        packages: {'[+]': ['ams']}
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #2563eb; /* Blue */
+            --primary-dark: #1e40af;
+            --secondary: #64748b; /* Slate */
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --accent-success: #22c55e;
+            --accent-warning: #f59e0b;
+            --accent-danger: #ef4444;
+            --border: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg-light);
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        /* --- Header & Nav --- */
+        .app-header {
+            background-color: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-title {
+            font-size: 1.5rem;
+            font-weight: 800;            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-subtitle {
+            font-size: 0.9rem;
+            color: var(--secondary);
+        }
+
+        .nav-scroller {
+            overflow-x: auto;
+            white-space: nowrap;
+            padding-bottom: 5px;
+            margin-top: 1rem;
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .nav-scroller::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-tabs {
+            display: inline-flex;
+            gap: 0.5rem;
+        }
+
+        .tab-btn {
+            background: none;
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--secondary);
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn:hover {
+            background-color: #eff6ff;
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .tab-btn.active {
+            background-color: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.3);
+        }
+
+        /* --- Main Content --- */
+        .main-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            min-height: 80vh;
+        }
+
+        .content-section {
+            display: none; /* Hidden by default */
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.4s ease;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Header Row with Logos --- */
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .page-logos {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .page-logos img {
+            height: 30px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+            border-bottom: 3px solid var(--primary);
+            display: inline-block;
+            padding-bottom: 5px;
+            margin-top: 0; /* Reset margin since it's in flex container */
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: #334155;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        h3::before {
+            content: '';
+            display: block;
+            width: 6px;
+            height: 24px;
+            background-color: var(--accent-warning);
+            border-radius: 4px;
+        }
+
+        /* --- Roadmap/Timeline Styles --- */
+        .roadmap {
+            position: relative;
+            margin: 30px 0 30px 10px;
+            padding-left: 20px;
+        }
+
+        /* Vertical Line */
+        .roadmap::before {
+            content: '';
+            position: absolute;
+            left: 19px; /* Adjust to center with marker */
+            top: 10px;
+            bottom: 20px;
+            width: 3px;
+            background: #cbd5e1;
+            z-index: 0;
+        }
+
+        .roadmap-item {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .roadmap-marker {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            border: 4px solid var(--white);
+            box-shadow: 0 0 0 3px #cbd5e1;
+            flex-shrink: 0;
+        }
+
+        .roadmap-item.elimination .roadmap-marker {
+            background-color: var(--accent-danger);
+            box-shadow: 0 0 0 3px #fecaca;
+        }
+
+        .roadmap-content {
+            flex-grow: 1;
+            background: var(--white);
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .roadmap-item.elimination .roadmap-content {
+            border-left: 5px solid var(--accent-danger);
+        }
+
+        .roadmap-title {
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .elimination-badge {
+            display: inline-block;
+            background-color: #fef2f2;
+            color: var(--accent-danger);
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            border: 1px solid #fee2e2;
+            margin-top: 5px;
+        }
+
+        /* --- Elaborate Box --- */
+        .elaborate-box {
+            background: linear-gradient(to right, #f0f9ff, #e0f2fe);
+            border: 1px solid #bae6fd;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .elaborate-title {
+            color: #0369a1;
+            font-weight: 800;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* --- Quiz Box --- */
+        .quiz-box {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .quiz-question {
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #1e293b;
+        }
+        
+        .quiz-options {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .quiz-options li {
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .quiz-options li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+        }
+        
+        .correct-answer {
+            margin-top: 8px;
+            font-size: 0.85rem;
+            color: var(--accent-success);
+            font-weight: 700;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 5px;
+        }
+        
+        .quiz-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .quiz-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* --- Comparison Table (Do's & Don'ts) --- */
+        .comparison-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        
+        .comparison-table th {
+            padding: 12px;
+            color: white;
+            font-weight: 800;
+            text-align: center;
+        }
+        
+        .comparison-table th.dont { background-color: var(--accent-danger); }
+        .comparison-table th.do { background-color: var(--accent-success); }
+        
+        .comparison-table td {
+            padding: 15px;
+            vertical-align: top;
+            border-bottom: 1px solid var(--border);
+            width: 50%;
+        }
+        
+        .comparison-table td.dont-col { background-color: #fef2f2; color: #991b1b; }
+        .comparison-table td.do-col { background-color: #f0fdf4; color: #166534; }
+        
+        .comparison-table tr:last-child td { border-bottom: none; }
+
+        /* --- Components --- */
+        .rundown-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .rundown-table th, .rundown-table td {
+            border: 1px solid var(--border);
+            padding: 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .rundown-table th {
+            background-color: #f1f5f9;
+            color: var(--primary-dark);
+            font-weight: 700;
+        }
+
+        .highlight-box {
+            background-color: #fff7ed;
+            border-left: 4px solid var(--accent-warning);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .alert-box {
+            background-color: #fef2f2;
+            border: 1px solid #fee2e2;
+            color: var(--accent-danger);
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: 700;
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .success-box {
+            background-color: #f0fdf4;
+            border: 1px solid #dcfce7;
+            color: #15803d;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .script-text {
+            font-family: 'Courier New', monospace;
+            background-color: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            padding: 10px;
+            color: #475569;
+            margin: 10px 0;
+            border-radius: 6px;
+        }
+
+        ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- Mobile Responsive --- */
+        @media (max-width: 768px) {
+            .app-header { padding: 1rem; }
+            .content-section { padding: 1.5rem; }
+            .rundown-table { display: block; overflow-x: auto; }
+            .header-row { flex-direction: column-reverse; align-items: flex-start; }
+            .page-logos { margin-bottom: 10px; width: 100%; justify-content: flex-end; }
+        }
+
+        @media (min-width: 769px) {
+            .page-logos img { height: 35px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="app-header">
+        <div class="header-title">
+            <span>🚀</span> MATH MASTER INCUBATION
+        </div>
+        <div class="header-subtitle">Silabus Pelatihan Guru Matematika Komprehensif (SD-SMA/UTBK)</div>
+        
+        <div class="nav-scroller">
+            <div class="nav-tabs">
+                <button class="tab-btn active" onclick="window.openTab('overview')">Ringkasan</button>
+                <button class="tab-btn" onclick="window.openTab('sesi1')">1: Tes Diagnostik</button>
+                <button class="tab-btn" onclick="window.openTab('sesi2')">2: Big Picture (SD/CPA)</button>
+                <button class="tab-btn" onclick="window.openTab('sesi3')">3: Math SMP</button>
+                <button class="tab-btn" onclick="window.openTab('sesi4')">4: Math SMA</button>
+                <button class="tab-btn" onclick="window.openTab('sesi5')">5: Numerasi SNBT</button>
+                <button class="tab-btn" onclick="window.openTab('sesi6')">6: Whiteboarding</button>
+                <button class="tab-btn" onclick="window.openTab('sesi7')">7: Class Mgmt</button>
+                <button class="tab-btn" onclick="window.openTab('sesi8')">8: Demo Teaching</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <div class="main-container">
+
+        <!-- TAB: RINGKASAN -->
+        <div id="overview" class="content-section active">
+            <div class="header-row">
+                <h2>Overview Program & Filosofi</h2>
+                <div class="page-logos">
+                    <img src="https://imgix3.ruangguru.com/assets/miscellaneous/png_zekej2_3984.png" alt="Ruangguru">
+                    <img src="https://imgix3.ruangguru.com/assets/miscellaneous/png_63qwb1_5293.png" alt="Brain Academy">
+                    <img src="https://imgix3.ruangguru.com/assets/miscellaneous/png_aaojxe_9962.png" alt="Math Champs">
+                </div>
+            </div>
+
+            <!-- Bagian Elaborasi Filosofi -->
+            <div class="elaborate-box">
+                <div class="elaborate-title">🕵️‍♂️ Mencetak "Double Agent" (The Hybrid Teacher)</div>
+                <p>
+                    Dalam ekosistem pendidikan saat ini, terdapat jurang pemisah yang besar antara <strong>Pemahaman Konsep</strong> (yang diajarkan di sekolah/Singapore Math) dan <strong>Kecepatan Strategis</strong> (yang dibutuhkan di UTBK/SNBT).
+                </p>
+                <p>
+                    Siswa seringkali bingung: <em>"Kenapa di sekolah harus pakai cara panjang, tapi di bimbel diajarkan cara cepat yang tidak masuk akal?"</em>. Guru lulusan program ini adalah <strong>"Double Agent"</strong> yang mampu menari di dua dunia tersebut.
+                </p>
+                
+                <hr style="border: 0; border-top: 1px dashed #bae6fd; margin: 15px 0;">
+
+                <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 250px;">
+                        <h4 style="color: #0369a1; margin-top: 0;">1. Fondasi: Singapore Math (CPA)</h4>
+                        <p style="font-size: 0.9rem;">
+                            Kami menggunakan pendekatan <strong>Concrete-Pictorial-Abstract (CPA)</strong>. Sebelum siswa menyentuh rumus abstrak ($x, y$), mereka harus paham visualisasinya lewat <em>Bar Model</em>. Ini memastikan siswa tidak sekadar menghafal ("robot"), tapi paham logikanya ("human").
+                        </p>
+                    </div>
+                    <div style="flex: 1; min-width: 250px;">
+                        <h4 style="color: #0369a1; margin-top: 0;">2. Eksekusi: SNBT Strategy</h4>
+                        <p style="font-size: 0.9rem;">
+                            Setelah konsep kuat, guru diajarkan teknik <strong>"Sniper"</strong> untuk ujian seleksi. Bagaimana menggunakan logika, eliminasi opsi, dan estimasi untuk menjawab soal dalam < 60 detik tanpa melanggar aturan matematika.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>🎓 Kompetensi Lulusan (Outcome)</h3>
+            <p>Setelah mengikuti 8 sesi intensif ini, seorang guru diharapkan mampu:</p>
+            <div class="rundown-table">
+                <table style="width: 100%;">
+                    <tr>
+                        <th style="width: 5%;">No</th>
+                        <th style="width: 30%;">Kompetensi</th>
+                        <th>Indikator Keberhasilan</th>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">1</td>
+                        <td><strong>Diagnosa Miskonsepsi</strong></td>
+                        <td>Bisa membedakan mana siswa yang "salah hitung" vs "salah konsep". Mampu memperbaiki akar masalah menggunakan pendekatan visual (SD/SMP).</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">2</td>
+                        <td><strong>Bridging (Menjembatani)</strong></td>
+                        <td>Mampu menjelaskan transisi mulus dari Bar Model (Gambar) ke Aljabar (Simbol) tanpa membuat siswa kaget/trauma.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">3</td>
+                        <td><strong>Strategic Thinking</strong></td>
+                        <td>Tidak terpaku pada satu cara. Bisa mengajarkan "Cara Sekolah" untuk esai dan "Cara Logika" untuk pilihan ganda.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">4</td>
+                        <td><strong>Classroom Command</strong></td>
+                        <td>Memiliki wibawa, manajemen papan tulis yang rapi (Zonasi), dan teknik vokal yang tidak monoton.</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div style="background: #fff7ed; border-left: 4px solid #f59e0b; padding: 15px; margin: 20px 0; border-radius: 0 8px 8px 0;">
+                <strong>Metode Pelatihan: "Bootcamp Style"</strong><br>
+                Ini bukan seminar duduk diam. Peserta wajib: <strong>On-Cam</strong>, <strong>Berdiri</strong>, dan <strong>Simulasi Mengajar</strong> di setiap sesi. Kami percaya <em>teaching is a performance art</em>.
+            </div>
+
+            <h3>🗺️ Peta Perjalanan Training (Roadmap 8 Sesi)</h3>
+            
+            <div class="roadmap">
+                
+                <!-- Sesi 1 -->
+                <div class="roadmap-item elimination">
+                    <div class="roadmap-marker">1</div>
+                    <div class="roadmap-content">
+                        <span class="roadmap-title">Sesi 1: Tes Diagnostik & Filtering</span>
+                        <p>Pemetaan kompetensi awal. Tes buta konsep dasar (Pecahan, Aljabar, Logika). Mencari "bibit" yang bisa dibentuk.</p>
+                        <span class="elimination-badge">⛔ TITIK ELIMINASI 1</span>
+                    </div>
+                </div>
+
+                <!-- Sesi 2 -->
+                <div class="roadmap-item">
+                    <div class="roadmap-marker">2</div>
+                    <div class="roadmap-content">
+                        <span class="roadmap-title">Sesi 2: The Big Picture & Singapore Math</span>
+                        <p>Membedah Kurikulum Spiral. Deep dive pendekatan <strong>CPA (Concrete-Pictorial-Abstract)</strong> & penggunaan <strong>Bar Models</strong> untuk soal cerita.</p>
+                    </div>
+                </div>
+
+                <!-- Sesi 3 -->
+                <div class="roadmap-item">
+                    <div class="roadmap-marker">3</div>
+                    <div class="roadmap-content">
+                        <span class="roadmap-title">Sesi 3: Matematika SMP (The Transition)</span>
+                        <p>Fase krusial: Transisi dari Aritmatika (Angka) ke Aljabar (Huruf). Menjembatani Bar Model ke Persamaan Linear ($x, y$).</p>
+                    </div>
+                </div>
+
+                <!-- Sesi 4 -->
+                <div class="roadmap-item">
+                    <div class="roadmap-marker">4</div>
+                    <div class="roadmap-content">
+                        <span class="roadmap-title">Sesi 4: Matematika SMA (The Abstract)</span>
+                        <p>Abstraksi tingkat lanjut. Membangun intuisi Kalkulus (Limit sebagai pendekatan, Integral sebagai akumulasi) & Trigonometri Visual.</p>
+                    </div>
+                </div>
+
+                <!-- Sesi 5 -->
+                <div class="roadmap-item">
+                    <div class="roadmap-marker">5</div>
+                    <div class="roadmap-content">
+                        <span class="roadmap-title">Sesi 5: Numerasi SNBT (The Strategy)</span>
+                        <p>Logika tingkat dewa. Sufisiensi Data, Jebakan Logika, dan Penalaran Kuantitatif untuk menaklukkan ujian seleksi.</p>
+                    </div>
+                </div>
+
+                <!-- Sesi 6 -->
+                <div class="roadmap-item">
+                    <div class="roadmap-marker">6</div>
+                    <div class="roadmap-content">
+                        <span class="roadmap-title">Sesi 6: Whiteboarding (Offline Skill)</span>
+                        <p>Teknik papan tulis fisik. Zonasi (Kiri-Tengah-Kanan), color coding, dan visualisasi geometri 3D yang presisi.</p>
+                    </div>
+                </div>
+
+                <!-- Sesi 7 -->
+                <div class="roadmap-item">
+                    <div class="roadmap-marker">7</div>
+                    <div class="roadmap-content">
+                        <span class="roadmap-title">Sesi 7: Classroom Management</span>
+                        <p>Psikologi kelas. Menangani siswa sulit ("Si Paling Tau", "Si Tidur"), teknik vokal, dan membangun "Connection before Correction".</p>
+                    </div>
+                </div>
+
+                <!-- Sesi 8 -->
+                <div class="roadmap-item elimination">
+                    <div class="roadmap-marker">8</div>
+                    <div class="roadmap-content">
+                        <span class="roadmap-title">Sesi 8: Final Demo Teaching</span>
+                        <p>Simulasi mengajar komprehensif (20 menit). Menguji integrasi Konsep, Pedagogi, dan Manajemen Kelas.</p>
+                        <span class="elimination-badge">⛔ FINAL DECISION (HIRED/REJECTED)</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- TAB: SESI 1 (DIAGNOSTIK) -->
+        <div id="sesi1" class="content-section">
+            <div class="header-row">
+                <h2>Sesi 1: Tes Diagnostik</h2>
+                <div class="page-logos">
+                    <img src="https://imgix3.ruangguru.com/assets/miscellaneous/png_zekej2_3984.png" alt="Logo">
+                </div>
+            </div>
+
+            <p><strong>Fokus:</strong> Memetakan "lubang" pemahaman peserta dari konsep dasar (SD) hingga lanjut (SMA). Banyak guru SMA lupa konsep SD, dan guru SD takut materi SMA.</p>
+
+            <div class="alert-box">
+                ⚠️ CRITICAL: Kandidat yang memiliki miskonsepsi fundamental (misal: salah definisi pecahan atau aljabar dasar) berisiko digugurkan.
+            </div>
+
+            <h3>Sample Diagnostic Questions</h3>
+            
+            <div class="quiz-container">
+                <!-- Soal SD/Singapore Math -->
+                <div class="quiz-box">
+                    <div class="quiz-question">1. [Level SD] Manakah visualisasi yang tepat untuk $3 \times \frac{1}{2}$?</div>
+                    <ul class="quiz-options">
+                        <li>A. 3 buah lingkaran dibagi 2</li>
+                        <li>B. Setengah dari 3 benda</li>
+                        <li>C. 3 kelompok, masing-masing berisi setengah</li>
+                        <li>D. 1 kelompok berisi 3 dan setengah</li>
+                    </ul>
+                    <div class="correct-answer">Kunci: C (Konsep perkalian sebagai 'Groups of')</div>
+                </div>
+
+                <!-- Soal SMP -->
+                <div class="quiz-box">
+                    <div class="quiz-question">2. [Level SMP] Kenapa $(-2) \times (-3) = 6$?</div>
+                    <ul class="quiz-options">
+                        <li>A. Karena sudah aturannya</li>
+                        <li>B. Min kali min jadi plus</li>
+                        <li>C. Menggunakan pola bilangan mundur</li>
+                        <li>D. Karena lawan dari hutang adalah bayar</li>
+                    </ul>
+                    <div class="correct-answer">Kunci: C (Pembuktian Pola/Logika)</div>
+                </div>
+
+                <!-- Soal SMA -->
+                <div class="quiz-box">
+                    <div class="quiz-question">3. [Level SMA] Definisi Limit $\lim_{x \to c} f(x) = L$ adalah...</div>
+                    <ul class="quiz-options">
+                        <li>A. $f(c) = L$</li>
+                        <li>B. Nilai $f(x)$ saat $x$ mendekati $c$, tapi $x \neq c$</li>
+                        <li>C. $f(x)$ kontinu di $c$</li>
+                        <li>D. Turunan fungsi di $c$</li>
+                    </ul>
+                    <div class="correct-answer">Kunci: B (Konsep Limit Intuitive)</div>
+                </div>
+
+                <!-- Soal SNBT -->
+                <div class="quiz-box">
+                    <div class="quiz-question">4. [Level SNBT] Jika $x$ bilangan ganjil, apakah $2x$ genap? (Kecukupan Data)</div>
+                    <div class="correct-answer">Kunci: Cukup (Definisi Bilangan Genap)</div>
+                </div>
+            </div>
+
+            <h3>Blind Demo (5 Menit)</h3>
+            <p>Kandidat diberi topik acak (misal: "Jelaskan kenapa bagi pecahan itu dikali balik") dan harus menjelaskan tanpa persiapan.</p>
+        </div>
+
+        <!-- TAB: SESI 2 (BIG PICTURE) -->
+        <div id="sesi2" class="content-section">
+            <div class="header-row">
+                <h2>Sesi 2: Big Picture & Singapore Math</h2>
+            </div>
+
+            <p><strong>Fokus:</strong> Memahami kurikulum spiral. Matematika bukan kumpulan bab terpisah, tapi cerita bersambung.</p>
+
+            <div class="elaborate-box">
+                <div class="elaborate-title">🧠 The CPA Approach (Singapore Math)</div>
+                <p>Kita menggunakan framework ini untuk menjelaskan konsep abstrak:</p>
+                <ul>
+                    <li><strong>Concrete (Nyata):</strong> Menggunakan benda fisik (kancing, blok, uang mainan).</li>
+                    <li><strong>Pictorial (Gambar):</strong> Menggunakan <strong>Bar Model</strong> (Model Batang) atau Number Bond.</li>
+                    <li><strong>Abstract (Simbol):</strong> Menggunakan angka dan notasi matematika ($3 + x = 5$).</li>
+                </ul>
+            </div>
+
+            <h3>1. The Spiral Curriculum (SD - SMA - UTBK)</h3>
+            <table class="rundown-table">
+                <thead>
+                    <tr>
+                        <th style="width:20%">Topik</th>
+                        <th style="width:25%">SD (CPA)</th>
+                        <th style="width:25%">SMP (Transisi)</th>
+                        <th style="width:30%">SMA/UTBK (Formal/Logic)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Aljabar</strong></td>
+                        <td><strong>Model Drawing:</strong> Kotak kosong ($\square$) atau Bar Model untuk mewakili nilai yang tidak diketahui.</td>
+                        <td><strong>Variabel:</strong> Mengenal $x, y$. Transisi dari kotak $\square$ ke huruf. PLSV & SPLDV.</td>
+                        <td><strong>Fungsi & Pola:</strong> $f(x)$, Pola Bilangan, Fungsi Komposisi, dan Logika Sufisiensi Data.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Geometri</strong></td>
+                        <td><strong>Visual:</strong> Mengenal bentuk, jaring-jaring, dan luas lewat satuan kotak.</td>
+                        <td><strong>Deduktif:</strong> Dalil Pythagoras, Kesebangunan (pembuktian sederhana).</td>
+                        <td><strong>Analitik:</strong> Dimensi Tiga, Vektor, Transformasi Geometri dengan matriks.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>2. Bar Model Workshop</h3>
+            <p>Guru dilatih menyelesaikan soal cerita kompleks (Word Problems) menggunakan Bar Model sebelum menggunakan Aljabar.</p>
+            <div class="highlight-box">
+                <strong>Contoh Kasus:</strong> "Budi punya uang 2x lipat Ani. Setelah Budi kasih Rp 10.000 ke Ani, uang mereka sama."<br>
+                <em>Guru harus bisa menggambar model batang sebelum menulis persamaan $2x - 10.000 = x + 10.000$.</em>
+            </div>
+        </div>
+
+        <!-- TAB: SESI 3 (SMP) -->
+        <div id="sesi3" class="content-section">
+            <div class="header-row">
+                <h2>Sesi 3: Matematika SMP</h2>
+            </div>
+
+            <p><strong>Fokus:</strong> Masa transisi krusial. Di sinilah siswa biasanya mulai membenci matematika karena "tiba-tiba ada huruf". Guru harus bisa menjembatani Aritmatika ke Aljabar.</p>
+
+            <h3>Key Concepts to Master</h3>
+            <ul>
+                <li><strong>Bilangan Bulat:</strong> Operasi bilangan negatif (Hutang vs Bayar, Garis Bilangan).</li>
+                <li><strong>Aljabar Dasar (PLSV):</strong> Konsep "Timbangan" (ruas kiri = ruas kanan). Jangan ajarkan "Pindah Ruas berubah tanda" tanpa paham konsep kesetaraan.</li>
+                <li><strong>Relasi & Fungsi:</strong> Konsep input-output mesin fungsi.</li>
+                <li><strong>Geometri Datar:</strong> Dalil Pythagoras (Visual proof) & Lingkaran.</li>
+            </ul>
+
+            <div class="quiz-container">
+                <div class="quiz-box">
+                    <strong>Common Mistake:</strong><br>
+                    $(a+b)^2 = a^2 + b^2$<br>
+                    <span style="color:red">SALAH BESAR!</span>
+                </div>
+                <div class="quiz-box">
+                    <strong>Correction Strategy:</strong><br>
+                    Gunakan luas persegi. Sisi $(a+b)$.<br>
+                    Hasilnya ada 4 bagian: $a^2$, $b^2$, dan dua persegi panjang $ab$.<br>
+                    Jadi: $a^2 + 2ab + b^2$.
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: SESI 4 (SMA) -->
+        <div id="sesi4" class="content-section">
+            <div class="header-row">
+                <h2>Sesi 4: Matematika SMA</h2>
+            </div>
+
+            <p><strong>Fokus:</strong> Abstraksi tingkat tinggi. Kalkulus dan Trigonometri.</p>
+            
+            <h3>1. The Calculus Bridge</h3>
+            <p>Jangan langsung rumus! Bangun intuisi:</p>
+            <ol>
+                <li><strong>Limit:</strong> Bukan sekadar substitusi, tapi "Perilaku fungsi saat mendekati nilai tertentu".</li>
+                <li><strong>Turunan:</strong> Dari Gradien Garis Potong (Secant) $\to$ Gradien Garis Singgung (Tangent) via Limit.</li>
+                <li><strong>Integral:</strong> Dari Luas Persegi Panjang (Riemann Sum) $\to$ Luas Area Halus via Limit.</li>
+            </ol>
+
+            <h3>2. Trigonometri</h3>
+            <div class="highlight-box">
+                Hafalan Trigonometri sudut istimewa itu menyiksa. Ajarkan pakai <strong>Lingkaran Satuan (Unit Circle)</strong> atau Grafik Gelombang.
+            </div>
+            
+            <h3>Do's & Don'ts</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th class="dont">❌ JANGAN</th>
+                        <th class="do">✅ HARUS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="dont-col">Langsung kasih rumus cepat $y=x^n \implies y'=nx^{n-1}$.</td>
+                        <td class="do-col">Buktikan dulu pakai definisi limit $f'(x) = \lim_{h \to 0} \dots$.</td>
+                    </tr>
+                    <tr>
+                        <td class="dont-col">Menghafal rumus penjumlahan sin cos ($\sin A + \sin B$) tanpa pola.</td>
+                        <td class="do-col">Kenali pola: "Sinus itu setia (campur), Cosinus itu egois (misah)".</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- TAB: SESI 5 (SNBT) -->
+        <div id="sesi5" class="content-section">
+            <div class="header-row">
+                <h2>Sesi 5: Numerasi SNBT</h2>
+            </div>
+
+            <p><strong>Fokus:</strong> Penalaran Kuantitatif & Strategi Ujian. Mengubah mindset "Tukang Hitung" menjadi "Ahli Strategi".</p>
+
+            <h3>1. Tipe Soal "Maut"</h3>
+            <h4>A. Analisis Kecukupan Data (Data Sufficiency)</h4>
+            <div class="script-text">
+                <strong>Strategi:</strong> Jangan hitung sampai ketemu angka! Cukup cek apakah informasinya CUKUP.
+                <br>1. Cek (1) saja.
+                <br>2. Cek (2) saja.
+                <br>3. Kalau gagal, baru gabung (1) & (2).
+            </div>
+
+            <h4>B. Soal Jebakan (Logic Traps)</h4>
+            <div class="quiz-container">
+                <div class="quiz-box">
+                    <div class="quiz-question">Soal: Baju diskon 50% + 20%. Total diskon?</div>
+                    <div class="correct-answer">
+                        Bukan 70%! Tapi 60%.<br>
+                        (50% + 20% dari sisa 50% = 10%). Total 60%.
+                    </div>
+                </div>
+                <div class="quiz-box">
+                    <div class="quiz-question">Soal: Kecepatan pergi 40 km/j, pulang 60 km/j. Rata-rata?</div>
+                    <div class="correct-answer">
+                        Bukan 50! Tapi 48 km/j.<br>
+                        Gunakan Harmonic Mean $\frac{2ab}{a+b}$.
+                    </div>
+                </div>
+            </div>
+
+            <h3>2. Speed Math Tricks</h3>
+            <ul>
+                <li>Approximation (Pendekatan nilai, jangan hitung desimal detail).</li>
+                <li>Melihat pola ekor angka (Digit terakhir).</li>
+                <li>Eliminasi opsi jawaban yang tidak masuk akal.</li>
+            </ul>
+        </div>
+
+        <!-- TAB: SESI 6 (WHITEBOARDING) -->
+        <div id="sesi6" class="content-section">
+            <div class="header-row">
+                <h2>Sesi 6: Whiteboarding</h2>
+            </div>
+
+            <p><strong>Fokus:</strong> Keterampilan papan tulis fisik. Papan tulis adalah "Layar Bioskop" siswa.</p>
+            <div class="alert-box">
+                WAJIB: Peserta menggunakan papan tulis fisik dan berdiri.
+            </div>
+
+            <h3>The 3-Zone System</h3>
+            <div style="display: flex; gap: 10px; margin-bottom: 20px; height: 150px;">
+                <div style="flex:1; background:#e0f2fe; padding:10px; border:2px solid #0284c7; border-radius: 8px;">
+                    <h4 style="margin-top:0; color:#0284c7;">1. ANCHOR (Kiri)</h4>
+                    <small>Rumus, Definisi, Konsep Kunci. <br><strong>JANGAN DIHAPUS.</strong></small>
+                </div>
+                <div style="flex:2; background:#f0fdf4; padding:10px; border:2px solid #16a34a; border-radius: 8px;">
+                    <h4 style="margin-top:0; color:#16a34a;">2. STAGE (Tengah)</h4>
+                    <small>Pengerjaan Soal, Penurunan Rumus. <br>Area dinamis (tulis-hapus).</small>
+                </div>
+                <div style="flex:1; background:#fefce8; padding:10px; border:2px solid #ca8a04; border-radius: 8px;">
+                    <h4 style="margin-top:0; color:#ca8a04;">3. DRAFT (Kanan)</h4>
+                    <small>Kotretan kasar, perkalian susun. <br>Area "kotor".</small>
+                </div>
+            </div>
+
+            <h3>Visualizing Geometry</h3>
+            <p>Guru harus bisa menggambar bangun ruang (Kubus, Limas) dengan perspektif yang benar secara cepat. Latihan menarik garis putus-putus untuk rusuk belakang.</p>
+        </div>
+
+        <!-- TAB: SESI 7 (CLASS MGMT) -->
+        <div id="sesi7" class="content-section">
+            <div class="header-row">
+                <h2>Sesi 7: Classroom Management</h2>
+            </div>
+
+            <p><strong>Fokus:</strong> Psikologi kelas. Menangani siswa yang pasif, hiperaktif, atau "Si Paling Tau".</p>
+
+            <h3>Handling Students (Roleplay)</h3>
+            <div class="rundown-table">
+                <table style="width:100%">
+                    <tr>
+                        <th>Tipe Siswa</th>
+                        <th>Strategi Guru</th>
+                    </tr>
+                    <tr>
+                        <td><strong>The Know-It-All</strong><br>"Ah itu mah gampang, cara saya lebih cepet."</td>
+                        <td><strong>Validasi & Tantang:</strong> "Wih mantap! Coba maju share ke temen-temen. Kalau bener, kita pakai cara kamu." (Ubah jadi aset kelas).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>The Sleeper</strong><br>Tidur/Main HP.</td>
+                        <td><strong>Proximity Control:</strong> Dekati mejanya sambil tetap mengajar. Ketuk meja pelan atau sebut namanya dalam soal. Jangan marahi dari depan.</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h3>Voice Projection</h3>
+            <p>Latihan intonasi: <strong>Broadcaster Voice</strong> (untuk opening/closing) vs <strong>Storyteller Voice</strong> (untuk menjelaskan konsep).</p>
+        </div>
+
+        <!-- TAB: SESI 8 (DEMO) -->
+        <div id="sesi8" class="content-section">
+            <div class="header-row">
+                <h2>Sesi 8: Demo Teaching</h2>
+            </div>
+
+            <p><strong>Fokus:</strong> Ujian Akhir. Simulasi mengajar 20 menit yang merangkum semua sesi.</p>
+
+            <h3>Rubrik Penilaian</h3>
+            <table class="rundown-table">
+                <tr>
+                    <td><strong>Konsep (30%)</strong></td>
+                    <td>Apakah konsep benar? Apakah menggunakan pendekatan CPA (jika relevan)? Apakah menurunkan rumus (jika SMA)?</td>
+                </tr>
+                <tr>
+                    <td><strong>Pedagogi (30%)</strong></td>
+                    <td>Apakah instruksi jelas? Apakah ada cek pemahaman? Apakah ada "Bridge" dari konsep ke cara cepat?</td>
+                </tr>
+                <tr>
+                    <td><strong>Teknis (20%)</strong></td>
+                    <td>Penggunaan papan tulis (Zonasi), kejelasan suara, dan kontak mata.</td>
+                </tr>
+                <tr>
+                    <td><strong>Persona (20%)</strong></td>
+                    <td>Energi, antusiasme, dan kemampuan handling kelas.</td>
+                </tr>
+            </table>
+
+            <div class="success-box">
+                <strong>GOAL:</strong> Mencetak guru yang memahami "Why" (Konsep Singapore/Kurikulum Merdeka) dan "How" (Strategi UTBK).
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JavaScript for Tabs -->
+    <script>
+        // Use window.openTab to ensure it's globally accessible
+        window.openTab = function(tabId) {
+            // Hide all content sections
+            const contents = document.querySelectorAll('.content-section');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show specific content
+            const selectedTab = document.getElementById(tabId);
+            if (selectedTab) {
+                selectedTab.classList.add('active');
+            } else {
+                console.error("Tab ID not found:", tabId);
+            }
+
+            // Set active button state
+            const activeBtn = Array.from(buttons).find(btn => {
+                const onclickVal = btn.getAttribute('onclick');
+                return onclickVal && onclickVal.includes(tabId);
+            });
+            
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+            
+            // Scroll to top of content on mobile
+            if (window.innerWidth < 768) {
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            }
+        };
+        
+        // Log to confirm script loaded
+        console.log("Math Lesson Plan Interactive Script Loaded");
+    </script>
+</body>
+</html>
