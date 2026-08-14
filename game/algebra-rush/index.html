@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Algebra Rush: TV Edition</title>
-        
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;600&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
 
-    <!-- MathJax for Rendering Math Equations -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <!-- MathJax for Rendering Math Equations (Tanpa polyfill.io) -->
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <style>
@@ -52,6 +51,7 @@
             overflow: hidden;
         }
 
+        /* --- CONTAINER 960x540 (Base Resolution) --- */
         #game-container {
             width: 960px;
             height: 540px;
@@ -62,6 +62,7 @@
             flex-direction: column;
             overflow: hidden;
             box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            /* Important for scaling */
             transform-origin: center center;
         }
 
@@ -74,6 +75,7 @@
         .single-mode .p2-only { display: none !important; }
         .single-mode .player-panel.p1 { margin: 0 auto; width: 60%; }
 
+        /* --- SCREENS --- */
         #start-screen, #game-over-screen {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -81,13 +83,13 @@
             z-index: 100;
             flex-direction: column;
             text-align: center;
-            padding: 10px;
+            padding: 15px;
         }
 
         h1 {
             font-family: 'Fredoka', cursive;
-            font-size: 3rem; 
-            margin: 10px 0 5px 0;
+            font-size: 3.2rem; 
+            margin: 10px 0 10px 0;
             color: #fff;
             text-shadow: 3px 3px 0px #000;
         }
@@ -97,20 +99,21 @@
             margin: 5px 0 10px 0;
         }
 
+        /* --- MODE SELECTOR --- */
         .mode-selector {
             display: flex;
             gap: 15px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         .btn-mode {
             background: transparent;
             border: 2px solid rgba(255,255,255,0.3);
             color: rgba(255,255,255,0.6);
-            padding: 8px 20px;
+            padding: 8px 24px;
             border-radius: 20px;
             font-family: 'Fredoka';
             font-weight: bold;
-            font-size: 0.9rem;
+            font-size: 1rem;
             cursor: pointer;
             transition: all 0.2s;
         }
@@ -122,24 +125,25 @@
             transform: scale(1.05);
         }
 
+        /* --- DIFFICULTY SELECTOR --- */
         .diff-container {
-            margin: 5px 0 10px 0;
+            margin: 8px 0 12px 0;
             display: flex;
             flex-direction: column;
             gap: 5px;
             align-items: center;
         }
-        .diff-label { font-family: 'Fredoka'; font-size: 0.9rem; color: var(--gold); letter-spacing: 1px; }
-        .diff-options { display: flex; gap: 10px; background: rgba(0,0,0,0.3); padding: 5px 10px; border-radius: 25px; }
+        .diff-label { font-family: 'Fredoka'; font-size: 0.95rem; color: var(--gold); letter-spacing: 1px; }
+        .diff-options { display: flex; gap: 10px; background: rgba(0,0,0,0.3); padding: 6px 12px; border-radius: 25px; }
         .btn-diff {
             background: transparent;
             border: 2px solid rgba(255,255,255,0.3);
             color: rgba(255,255,255,0.6);
-            padding: 5px 15px;
+            padding: 6px 18px;
             border-radius: 20px;
             font-family: 'Fredoka';
             font-weight: bold;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             cursor: pointer;
             transition: all 0.2s;
         }
@@ -153,31 +157,33 @@
             font-family: 'Fredoka', cursive;
             background: linear-gradient(180deg, #ffd700, #ffaa00);
             border: 3px solid #fff;
-            padding: 10px 40px;
-            font-size: 1.2rem;
+            padding: 10px 45px;
+            font-size: 1.3rem;
             font-weight: 600;
             color: #5a3e00;
             border-radius: 50px;
             cursor: pointer;
             box-shadow: 0 4px 0 #b37700;
             transition: transform 0.1s;
-            margin-top: 5px;
+            margin-top: 10px;
         }
         .btn-start:active { transform: translateY(4px); box-shadow: 0 0 0 #b37700; }
 
+        /* Rules Box */
         .rules-box {
             background: rgba(255,255,255,0.1); 
-            padding: 10px 20px; 
+            padding: 12px 25px; 
             border-radius: 15px; 
-            max-width: 600px; 
-            margin-bottom: 5px;
-            font-size: 0.9rem;
+            max-width: 620px; 
+            margin-bottom: 8px;
+            font-size: 0.95rem;
             color: #ffffff;
             border: 1px solid rgba(255,255,255,0.2);
         }
-        .rules-box p { margin: 3px 0; }
-        .rules-box ul { margin: 3px 0 3px 20px; padding: 0; }
+        .rules-box p { margin: 4px 0; }
+        .rules-box ul { margin: 4px 0 4px 20px; padding: 0; }
 
+        /* --- HUD --- */
         header {
             height: 90px;
             min-height: 90px;
@@ -219,7 +225,7 @@
 
         .player-name {
             font-family: 'Fredoka', cursive;
-            font-size: 1rem;
+            font-size: 1.1rem;
             color: #ddd;
             margin-bottom: 2px;
         }
@@ -284,12 +290,13 @@
         }
         .active-turn .turn-indicator { opacity: 1; }
 
+        /* --- ARENA --- */
         #level-info {
             text-align: center;
             font-family: 'Fredoka', cursive;
             color: var(--gold);
             margin-top: 5px;
-            font-size: 1rem;
+            font-size: 1.1rem;
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
             height: 25px;
         }
@@ -311,7 +318,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 0.9rem; 
+            font-size: 0.95rem; 
             font-weight: bold;
             color: var(--card-text);
             cursor: pointer;
@@ -333,6 +340,7 @@
             font-size: 100% !important; 
         }
 
+        /* Logic Styles */
         .card.popped {
             visibility: hidden;
             pointer-events: none;
@@ -341,6 +349,7 @@
         .card.p1-hit { background: var(--p1-color) !important; color: #fff !important; }
         .card.p2-hit { background: var(--p2-color) !important; color: #fff !important; }
 
+        /* Floating Points */
         .floating-points {
             position: fixed; 
             font-family: 'Fredoka', cursive;
@@ -365,7 +374,9 @@
     </style>
 </head>
 <body>
+    <!-- WRAPPER FOR 960x540 (AUTO SCALED) -->
     <div id="game-container">
+        
         <!-- Start Screen -->
         <div id="start-screen" class="flex-center">
             <h1>Algebra Rush</h1>
@@ -389,11 +400,11 @@
 
             <div class="rules-box">
                 <p style="margin:3px 0; color:var(--gold);"><strong>💰 Modal Awal:</strong> 10 Poin</p>
-                <p style="margin:3px 0;">🎯 <strong>Jawab Benar:</strong> Skor +x</p>
-                <p style="margin:3px 0;">📉 <strong>Jawab Salah:</strong> Skor -x</p>
+                <p style="margin:3px 0;">🎯 <strong>Jawab Benar ($x > 0$):</strong> Skor +x</p>
+                <p style="margin:3px 0;">📉 <strong>Jawab Salah ($x < 0$):</strong> Skor -x</p>
                 
                 <!-- DYNAMIC RULE TEXT -->
-                <p id="rule-target" style="margin:3px 0; color: #aaffaa; font-weight: bold; border: 1px solid #aaffaa; border-radius: 5px; padding: 2px; background: rgba(0,255,0,0.1);">
+                <p id="rule-target" style="margin:4px 0; color: #aaffaa; font-weight: bold; border: 1px solid #aaffaa; border-radius: 5px; padding: 3px; background: rgba(0,255,0,0.1);">
                     🚀 TARGET: Skor 30 Menang!
                 </p>
                 
@@ -459,7 +470,8 @@
         <section id="arena">
             <!-- Cards generated by JS -->
         </section>
-    </div>
+
+    </div> <!-- END CONTAINER -->
 
     <script>
         const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -593,9 +605,10 @@
         class Game {
             constructor() {
                 this.timerInterval = null;
+                // Game config
                 this.turnDuration = 60; // seconds
 
-                this.startLevel = 1; 
+                this.startLevel = 1; // Default starting level
                 this.gameMode = 'multi'; // 'single' or 'multi'
 
                 this.state = {
@@ -626,7 +639,7 @@
                     scoreP1: document.getElementById('score-p1'),
                     scoreP2: document.getElementById('score-p2'),
                     ruleTarget: document.getElementById('rule-target'),
-                    
+
                     winnerText: document.getElementById('winner-text'),
                     winReason: document.getElementById('win-reason'),
                     endNameP1: document.getElementById('end-name-p1'),
@@ -650,8 +663,14 @@
 
             selectMode(mode) {
                 this.gameMode = mode;
+                
                 document.getElementById('btn-mode-1p').classList.toggle('active', mode === 'single');
                 document.getElementById('btn-mode-2p').classList.toggle('active', mode === 'multi');
+
+                const p2Els = document.querySelectorAll('.p2-only');
+                p2Els.forEach(el => {
+                    el.style.display = mode === 'single' ? 'none' : '';
+                });
 
                 if (mode === 'single') {
                     this.els.ruleTarget.innerHTML = "🚀 TARGET: Skor 50 Menang!";
@@ -664,6 +683,7 @@
                 const n1 = "Player 1";
                 const n2 = "Player 2";
                 
+                // Reset State
                 this.state = {
                     level: this.startLevel, 
                     turn: 'p1',
@@ -742,7 +762,7 @@
                 this.state[player].score += value;
                 this.updateScoreUI();
 
-                // Win Conditions
+                // WIN CONDITIONS
                 if (this.gameMode === 'single') {
                     if (this.state.p1.score >= 50) {
                         this.endGame(this.state.p1.name, "TARGET 50 TERCAPAI!");
@@ -756,7 +776,7 @@
                     }
                 }
 
-                // Negative Score Death
+                // CHECK NEGATIVE SCORE DEATH
                 if (this.state[player].score < 0) {
                     const loserName = this.state[player].name;
                     if (this.gameMode === 'single') {
@@ -910,6 +930,7 @@
         const game = new Game();
         game.selectMode('multi'); 
 
+        // AUTO SCALING LOGIC FOR TV
         function resizeGame() {
             const gameContainer = document.getElementById('game-container');
             const targetWidth = 960;
