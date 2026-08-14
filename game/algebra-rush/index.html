@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Algebra Rush: TV Edition</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;600&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <!-- MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-color: #2b1055; 
+            --bg-gradient: radial-gradient(circle at center, #4b1d85 0%, #2b1055 100%);
+            
+            /* Player 1 Colors (Cyan) */
+            --p1-color: #00d2ff; 
+            --p1-bg: rgba(0, 210, 255, 0.15);
+            
+            /* Player 2 Colors (Magenta) */
+            --p2-color: #ff47bc; 
+            --p2-bg: rgba(255, 71, 188, 0.15);
+
+            --card-bg: #ffffff;
+            --card-text: #2b1055;
+            --text-color: #ffffff;
+            --gold: #ffd700;
+        }
+
+        * {
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000; /* Letterbox background for TV */
+            font-family: 'Nunito', sans-serif;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* --- CONTAINER 960x540 (Base Resolution) --- */
+        #game-container {
+            width: 960px;
+            height: 540px;
+            background-color: var(--bg-color);
+            background-image: var(--bg-gradient);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            /* Important for scaling */
+            transform-origin: center center;
+        }
+
+        /* --- UTILS --- */
+        .hidden { display: none !important; }
+        .flex-center { display: flex; justify-content: center; align-items: center; }
+        .invisible { visibility: hidden; opacity: 0; }
+        
+        /* Single Player Specific Styles */
+        .single-mode .p2-only { display: none !important; }
+        .single-mode .player-panel.p1 { margin: 0 auto; width: 60%; }
+        
+        /* --- SCREENS --- */
+        #start-screen, #game-over-screen {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(20, 5, 40, 1);
+            z-index: 100;
+            flex-direction: column;
+            text-align: center;
+            padding: 10px;
+        }
+
+        h1 {
+            font-family: 'Fredoka', cursive;
+            font-size: 3rem; 
+            margin: 10px 0 5px 0;
+            color: #fff;
+            text-shadow: 3px 3px 0px #000;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin: 5px 0 10px 0;
+        }
+
+        /* --- MODE SELECTOR --- */
+        .mode-selector {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        .btn-mode {
+            background: transparent;
+            border: 2px solid rgba(255,255,255,0.3);
+            color: rgba(255,255,255,0.6);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-family: 'Fredoka';
+            font-weight: bold;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-mode.active {
+            background: var(--p1-color);
+            color: #fff;
+            border-color: var(--p1-color);
+            box-shadow: 0 0 10px var(--p1-bg);
+            transform: scale(1.05);
+        }
+
+        .input-group {
+            display: flex;
+            gap: 15px;
+            margin: 5px 0 10px 0;
+            justify-content: center;
+            align-items: center;
+            height: 40px;
+        }
+
+        .name-input {
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 2px solid #fff;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-family: 'Fredoka';
+            font-size: 1rem;
+            text-align: center;
+            width: 140px;
+        }
+        .name-input::placeholder { color: rgba(255,255,255,0.5); }
+        .name-input:focus { outline: none; background: rgba(255,255,255,0.2); }
+
+        /* --- DIFFICULTY SELECTOR --- */
+        .diff-container {
+            margin: 5px 0 10px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            align-items: center;
+        }
+        .diff-label { font-family: 'Fredoka'; font-size: 0.9rem; color: var(--gold); letter-spacing: 1px; }
+        .diff-options { display: flex; gap: 10px; background: rgba(0,0,0,0.3); padding: 5px 10px; border-radius: 25px; }
+        .btn-diff {
+            background: transparent;
+            border: 2px solid rgba(255,255,255,0.3);
+            color: rgba(255,255,255,0.6);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-family: 'Fredoka';
+            font-weight: bold;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-diff.active {
+            background: var(--gold); color: #5a3e00; border-color: var(--gold);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.4); transform: scale(1.05);
+        }
+        .btn-diff:hover:not(.active) { background: rgba(255,255,255,0.1); }
+
+        .btn-start {
+            font-family: 'Fredoka', cursive;
+            background: linear-gradient(180deg, #ffd700, #ffaa00);
+            border: 3px solid #fff;
+            padding: 10px 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #5a3e00;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #b37700;
+            transition: transform 0.1s;
+            margin-top: 5px;
+        }
+        .btn-start:active { transform: translateY(4px); box-shadow: 0 0 0 #b37700; }
+
+        /* Rules Box adjusted */
+        .rules-box {
+            background: rgba(255,255,255,0.1); 
+            padding: 10px 20px; 
+            border-radius: 15px; 
+            max-width: 600px; 
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: #ffffff; /* FORCE WHITE COLOR */
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .rules-box p { margin: 3px 0; }
+        .rules-box ul { margin: 3px 0 3px 20px; padding: 0; }
+
+        /* --- HUD --- */
+        header {
+            height: 90px;
+            min-height: 90px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 20px;
+            background: rgba(0,0,0,0.3);
+            border-bottom: 2px solid rgba(255,255,255,0.1);
+            transition: opacity 0.5s ease;
+        }
+
+        .player-panel {
+            width: 300px;
+            height: 100%;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 5px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .player-panel.active-turn {
+            transform: scale(1.02);
+            box-shadow: 0 0 15px rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .player-panel.p1 { border-color: var(--p1-color); }
+        .player-panel.p1.active-turn { box-shadow: 0 0 15px var(--p1-color); }
+        
+        .player-panel.p2 { border-color: var(--p2-color); }
+        .player-panel.p2.active-turn { box-shadow: 0 0 15px var(--p2-color); }
+
+        .player-name {
+            font-family: 'Fredoka', cursive;
+            font-size: 1rem;
+            color: #ddd;
+            margin-bottom: 2px;
+        }
+
+        .timer-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .timer-display {
+            font-family: 'Fredoka', monospace;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+            background: rgba(0,0,0,0.3);
+            padding: 0 10px;
+            border-radius: 8px;
+            margin-bottom: 2px;
+            line-height: 1.2;
+        }
+        .active-turn .timer-display { color: #fff; background: #ff3333; animation: pulse 1s infinite; }
+
+        .turn-timer-bar {
+            width: 80%;
+            height: 4px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 2px;
+            margin-top: 3px;
+            overflow: hidden;
+            display: none; 
+        }
+        .active-turn .turn-timer-bar { display: block; }
+
+        .turn-progress {
+            height: 100%;
+            width: 100%;
+            background: #ffd700;
+            transition: width 1s linear;
+        }
+
+        .score-display {
+            font-family: 'Fredoka', cursive;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .p1 .score-display { color: var(--p1-color); }
+        .p2 .score-display { color: var(--p2-color); }
+
+        .turn-indicator {
+            position: absolute;
+            top: -8px;
+            background: #fff;
+            color: #000;
+            padding: 1px 8px;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .active-turn .turn-indicator { opacity: 1; }
+
+        /* --- ARENA --- */
+        #level-info {
+            text-align: center;
+            font-family: 'Fredoka', cursive;
+            color: var(--gold);
+            margin-top: 5px;
+            font-size: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            height: 25px;
+        }
+
+        #arena {
+            flex: 1;
+            padding: 10px 40px;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); 
+            grid-template-rows: repeat(2, 1fr);   
+            gap: 12px;
+            width: 100%;
+            align-content: center;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Font size reduced to prevent cutoff */
+            font-size: 0.9rem; 
+            font-weight: bold;
+            color: var(--card-text);
+            cursor: pointer;
+            box-shadow: 0 4px 0 #b0b0b0;
+            border: none;
+            position: relative;
+            transition: transform 0.1s;
+            overflow: hidden;
+            height: 100%; 
+            text-align: center;
+            /* Padding added for breathing room */
+            padding: 0 4px;
+        }
+        
+        .card:active { transform: translateY(4px); box-shadow: 0 2px 0 #b0b0b0; }
+        
+        .card mjx-container {
+            margin: 0 !important;
+            pointer-events: none; 
+            /* Scaled down slightly to fit */
+            font-size: 100% !important; 
+        }
+
+        /* Logic Styles */
+        .card.popped {
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .card.p1-hit { background: var(--p1-color) !important; color: #fff !important; }
+        .card.p2-hit { background: var(--p2-color) !important; color: #fff !important; }
+
+        /* Floating Points */
+        .floating-points {
+            position: fixed; 
+            font-family: 'Fredoka', cursive;
+            font-weight: bold;
+            font-size: 2rem;
+            pointer-events: none;
+            animation: floatUp 0.8s forwards;
+            z-index: 200;
+            text-shadow: 2px 2px 0 #000;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-50px) scale(1.5); opacity: 0; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- WRAPPER FOR 960x540 (AUTO SCALED) -->
+    <div id="game-container">
+        
+        <!-- Start Screen -->
+        <div id="start-screen" class="flex-center">
+            <h1>Algebra Rush</h1>
+            
+            <!-- MODE SELECTOR -->
+            <div class="mode-selector">
+                <button id="btn-mode-1p" class="btn-mode" onclick="game.selectMode('single')">1 PLAYER</button>
+                <button id="btn-mode-2p" class="btn-mode active" onclick="game.selectMode('multi')">2 PLAYERS</button>
+            </div>
+
+            <div class="input-group">
+                <input id="input-p1" class="name-input" type="text" value="Player 1" placeholder="P1 Name" style="border-color: var(--p1-color);">
+                <div class="p2-only" style="display:flex; align-items:center; font-weight:bold; font-size:1.2rem; color: #fff;">VS</div>
+                <input id="input-p2" class="name-input p2-only" type="text" value="Player 2" placeholder="P2 Name" style="border-color: var(--p2-color);">
+            </div>
+
+            <!-- DIFFICULTY SELECTION (GATE MASUK) -->
+            <div class="diff-container">
+                <div class="diff-label">PILIH TINGKAT KESULITAN:</div>
+                <div class="diff-options">
+                    <button id="btn-lvl-1" class="btn-diff active" onclick="game.selectLevel(1)">EASY</button>
+                    <button id="btn-lvl-2" class="btn-diff" onclick="game.selectLevel(2)">MEDIUM</button>
+                    <button id="btn-lvl-3" class="btn-diff" onclick="game.selectLevel(3)">HARD</button>
+                    <button id="btn-lvl-4" class="btn-diff" onclick="game.selectLevel(4)">V. HARD</button>
+                </div>
+            </div>
+
+            <div class="rules-box">
+                <p style="margin:3px 0; color:var(--gold);"><strong>💰 Modal Awal:</strong> 10 Poin</p>
+                <p style="margin:3px 0;">🎯 <strong>Jawab Benar:</strong> Skor +x</p>
+                <p style="margin:3px 0;">📉 <strong>Jawab Salah:</strong> Skor -x</p>
+                
+                <!-- DYNAMIC RULE TEXT -->
+                <p id="rule-target" style="margin:3px 0; color: #aaffaa; font-weight: bold; border: 1px solid #aaffaa; border-radius: 5px; padding: 2px; background: rgba(0,255,0,0.1);">
+                    🚀 TARGET: Skor 30 Menang!
+                </p>
+                
+                <p style="margin:3px 0; color: #ff9999;"><strong>💀 GAME OVER JIKA:</strong></p>
+                <ul style="text-align: left; margin: 3px auto; width: fit-content; color: #ddd;">
+                    <li>Kehabisan Waktu (3 Menit)</li>
+                    <li>Skor menjadi Negatif (< 0)</li>
+                </ul>
+            </div>
+
+            <button class="btn-start" onclick="game.start()">MULAI MAIN</button>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="game-over-screen" class="hidden flex-center">
+            <h1 style="color: #ffd700; margin-bottom: 0;">GAME OVER!</h1>
+            <h2 id="winner-text" style="color: #fff; margin-bottom: 5px; font-size: 2rem;">Menang!</h2>
+            <p id="win-reason" style="color: #ddd; margin-top:0; margin-bottom: 15px; font-family:'Fredoka'; font-size: 1.2rem;">Alasan</p>
+            
+            <div style="display: flex; gap: 40px; margin-bottom: 20px;">
+                <div style="text-align: center;">
+                    <p id="end-name-p1" style="color:var(--p1-color); font-weight:bold; font-size: 1.2rem;">P1</p>
+                    <p id="end-score-p1" style="font-size:2.5rem; font-family:'Fredoka'; margin:0;">0</p>
+                </div>
+                <div id="end-p2-container" style="text-align: center;">
+                    <p id="end-name-p2" style="color:var(--p2-color); font-weight:bold; font-size: 1.2rem;">P2</p>
+                    <p id="end-score-p2" style="font-size:2.5rem; font-family:'Fredoka'; margin:0;">0</p>
+                </div>
+            </div>
+            
+            <button class="btn-start" onclick="game.start()">MAIN LAGI</button>
+        </div>
+
+        <!-- Main HUD -->
+        <header id="game-hud" class="invisible">
+            <div id="p1-panel" class="player-panel p1">
+                <div class="turn-indicator p2-only">GILIRANMU</div>
+                <div class="player-name" id="hud-name-p1">Player 1</div>
+                <div class="timer-wrapper">
+                    <div class="timer-display" id="timer-p1">03:00</div>
+                    <div class="turn-timer-bar p2-only"><div id="turn-bar-p1" class="turn-progress"></div></div>
+                </div>
+                <div class="score-display">Skor: <span id="score-p1">10</span></div>
+            </div>
+
+            <div class="p2-only" style="text-align: center; opacity: 0.8; width: 100px;">
+                <div style="font-family:'Fredoka'; font-size: 2rem; font-weight:bold; color: #fff;">VS</div>
+            </div>
+
+            <div id="p2-panel" class="player-panel p2 p2-only">
+                <div class="turn-indicator">GILIRANMU</div>
+                <div class="player-name" id="hud-name-p2">Player 2</div>
+                <div class="timer-wrapper">
+                    <div class="timer-display" id="timer-p2">03:00</div>
+                    <div class="turn-timer-bar"><div id="turn-bar-p2" class="turn-progress"></div></div>
+                </div>
+                <div class="score-display">Skor: <span id="score-p2">10</span></div>
+            </div>
+        </header>
+
+        <div id="level-info" class="invisible">Level 1: Pemanasan</div>
+
+        <section id="arena">
+            <!-- Cards generated by JS -->
+        </section>
+
+    </div> <!-- END CONTAINER -->
+
+    <script>
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        const audioCtx = new AudioContext();
+
+        function playSound(type) {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            const now = audioCtx.currentTime;
+
+            if (type === 'correct') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(523, now); 
+                osc.frequency.setValueAtTime(659, now + 0.1); 
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+                osc.start(now);
+                osc.stop(now + 0.4);
+            } else if (type === 'wrong') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(150, now);
+                osc.frequency.linearRampToValueAtTime(80, now + 0.2);
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+                osc.start(now);
+                osc.stop(now + 0.3);
+            } else if (type === 'switch') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(300, now);
+                gain.gain.setValueAtTime(0.1, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+                osc.start(now);
+                osc.stop(now + 0.1);
+            } else if (type === 'levelup') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(400, now);
+                osc.frequency.linearRampToValueAtTime(800, now + 0.3);
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.linearRampToValueAtTime(0, now + 0.5);
+                osc.start(now);
+                osc.stop(now + 0.5);
+            }
+        }
+
+        // FULL 160 QUESTION BANK (4 Levels x 2 Types x 20 Questions)
+        const qBank = {
+            easy: {
+                pos: [
+                    { l: "x + 2 = 5", v: 3 }, { l: "2x = 8", v: 4 }, { l: "3x = 9", v: 3 },
+                    { l: "x - 2 = 2", v: 4 }, { l: "4x = 16", v: 4 }, { l: "5x = 25", v: 5 },
+                    { l: "x + 6 = 10", v: 4 }, { l: "2x + 1 = 5", v: 2 }, { l: "3x - 1 = 8", v: 3 },
+                    { l: "x/2 = 2", v: 4 }, { l: "x/3 = 3", v: 9 }, { l: "2x = 10", v: 5 },
+                    { l: "x + 4 = 9", v: 5 }, { l: "6x = 12", v: 2 }, { l: "x - 5 = 0", v: 5 },
+                    { l: "2x - 2 = 4", v: 3 }, { l: "4x = 12", v: 3 }, { l: "3x = 15", v: 5 },
+                    { l: "x + 1 = 7", v: 6 }, { l: "5x = 10", v: 2 }
+                ],
+                neg: [
+                    { l: "x + 3 = 1", v: -2 }, { l: "2x = -4", v: -2 }, { l: "x - 1 = -3", v: -2 },
+                    { l: "3x = -9", v: -3 }, { l: "4x = -8", v: -2 }, { l: "x + 5 = 0", v: -5 },
+                    { l: "2x + 4 = 0", v: -2 }, { l: "x - 2 = -5", v: -3 }, { l: "5x = -15", v: -3 },
+                    { l: "6x = -12", v: -2 }, { l: "x + 4 = 2", v: -2 }, { l: "2x = -10", v: -5 },
+                    { l: "3x + 9 = 0", v: -3 }, { l: "x - 3 = -7", v: -4 }, { l: "4x = -16", v: -4 },
+                    { l: "2x + 6 = 2", v: -2 }, { l: "x + 1 = -4", v: -5 }, { l: "5x = -25", v: -5 },
+                    { l: "3x = -6", v: -2 }, { l: "x + 2 = -3", v: -5 }
+                ]
+            },
+            medium: {
+                pos: [
+                    { l: "2x = x + 3", v: 3 }, { l: "3x = x + 8", v: 4 }, { l: "4x - 2 = 10", v: 3 },
+                    { l: "2x + 1 = x + 4", v: 3 }, { l: "5x = 2x + 9", v: 3 }, { l: "3x - 2 = 7", v: 3 },
+                    { l: "4x = 3x + 5", v: 5 }, { l: "2x + 5 = 15", v: 5 }, { l: "6x = 5x + 2", v: 2 },
+                    { l: "3x + 1 = 10", v: 3 }, { l: "2x - 3 = x + 1", v: 4 }, { l: "5x - 5 = 20", v: 5 },
+                    { l: "4x + 2 = 14", v: 3 }, { l: "3x = 2x + 6", v: 6 }, { l: "2x + 4 = x + 7", v: 3 },
+                    { l: "7x = 6x + 3", v: 3 }, { l: "5x - 3 = 12", v: 3 }, { l: "2x + 6 = 12", v: 3 },
+                    { l: "3x - 4 = 5", v: 3 }, { l: "4x = 2x + 8", v: 4 }
+                ],
+                neg: [
+                    { l: "2x = x - 2", v: -2 }, { l: "3x = 2x - 5", v: -5 }, { l: "4x + 8 = 0", v: -2 },
+                    { l: "2x + 10 = 6", v: -2 }, { l: "5x = -10", v: -2 }, { l: "3x + 12 = 3", v: -3 },
+                    { l: "2x = x - 4", v: -4 }, { l: "4x + 5 = x - 4", v: -3 }, { l: "2x + 5 = 1", v: -2 },
+                    { l: "6x + 18 = 0", v: -3 }, { l: "3x - 2 = 4x", v: -2 }, { l: "2x + 3 = x - 1", v: -4 },
+                    { l: "5x + 20 = 0", v: -4 }, { l: "4x = 3x - 3", v: -3 }, { l: "2x + 8 = 4", v: -2 },
+                    { l: "3x + 9 = 0", v: -3 }, { l: "7x + 14 = 0", v: -2 }, { l: "2x - 1 = x - 5", v: -4 },
+                    { l: "5x + 15 = 0", v: -3 }, { l: "4x + 1 = x - 8", v: -3 }
+                ]
+            },
+            hard: {
+                pos: [
+                    { l: "2(x + 1) = 6", v: 2 }, { l: "3(x - 1) = 6", v: 3 }, { l: "2(x + 2) = 10", v: 3 },
+                    { l: "4(x - 1) = 4", v: 2 }, { l: "2(2x + 1) = 10", v: 2 }, { l: "3(x + 2) = 15", v: 3 },
+                    { l: "5(x - 2) = 5", v: 3 }, { l: "2(x - 3) = 4", v: 5 }, { l: "3(2x - 1) = 9", v: 2 },
+                    { l: "4(x + 1) = 12", v: 2 }, { l: "2(3x - 2) = 4", v: 2 }, { l: "5(x + 1) = 20", v: 3 },
+                    { l: "3(x - 2) = 9", v: 5 }, { l: "2(x + 5) = 14", v: 2 }, { l: "4(2x - 1) = 12", v: 2 },
+                    { l: "2(x + 4) = 12", v: 2 }, { l: "3(x + 1) = 9", v: 2 }, { l: "5(x - 1) = 10", v: 3 },
+                    { l: "2(2x + 3) = 14", v: 2 }, { l: "3(x - 3) = 3", v: 4 }
+                ],
+                neg: [
+                    { l: "2(x + 2) = 0", v: -2 }, { l: "3(x + 1) = -3", v: -2 }, { l: "2(x - 1) = -6", v: -2 },
+                    { l: "4(x + 2) = -4", v: -3 }, { l: "2(2x + 2) = -2", v: -2 }, { l: "3(x + 3) = 0", v: -3 },
+                    { l: "5(x + 2) = -5", v: -3 }, { l: "2(x + 4) = -2", v: -5 }, { l: "3(2x + 1) = -3", v: -1 },
+                    { l: "4(x + 1) = -8", v: -3 }, { l: "2(3x + 1) = -4", v: -1 }, { l: "5(x + 2) = -10", v: -4 },
+                    { l: "3(x + 1) = -9", v: -4 }, { l: "2(x - 2) = -8", v: -2 }, { l: "4(x + 3) = -4", v: -4 },
+                    { l: "2(x + 5) = 2", v: -4 }, { l: "3(x + 2) = -6", v: -4 }, { l: "5(x + 3) = -5", v: -4 },
+                    { l: "2(2x + 4) = 0", v: -2 }, { l: "3(x - 1) = -12", v: -3 }
+                ]
+            },
+            veryHard: {
+                pos: [
+                    { l: "\\frac{x}{2} + 1 = 3", v: 4 }, { l: "\\frac{x}{3} - 1 = 1", v: 6 }, { l: "\\frac{2x}{3} = 4", v: 6 },
+                    { l: "\\frac{x}{4} + 2 = 3", v: 4 }, { l: "\\frac{3x}{2} = 6", v: 4 }, { l: "\\frac{x}{5} + 1 = 2", v: 5 },
+                    { l: "\\frac{x+2}{3} = 2", v: 4 }, { l: "\\frac{x-1}{2} = 2", v: 5 }, { l: "\\frac{2x}{5} = 2", v: 5 },
+                    { l: "\\frac{x}{2} + \\frac{x}{2} = 4", v: 4 }, { l: "\\frac{x}{3} + 1 = 3", v: 6 }, { l: "\\frac{x}{4} = 2", v: 8 },
+                    { l: "\\frac{2x+2}{4} = 2", v: 3 }, { l: "\\frac{3x}{4} = 3", v: 4 }, { l: "\\frac{x}{2} - 2 = 0", v: 4 },
+                    { l: "\\frac{x}{5} = 1", v: 5 }, { l: "\\frac{x+1}{2} = 3", v: 5 }, { l: "\\frac{2x}{3} + 1 = 5", v: 6 },
+                    { l: "\\frac{x}{6} + 2 = 3", v: 6 }, { l: "\\frac{4x}{5} = 4", v: 5 }
+                ],
+                neg: [
+                    { l: "\\frac{x}{2} = -1", v: -2 }, { l: "\\frac{x}{3} + 1 = 0", v: -3 }, { l: "\\frac{2x}{3} = -2", v: -3 },
+                    { l: "\\frac{x}{4} = -1", v: -4 }, { l: "\\frac{3x}{2} = -3", v: -2 }, { l: "\\frac{x}{5} = -1", v: -5 },
+                    { l: "\\frac{x+2}{2} = 0", v: -2 }, { l: "\\frac{x-1}{3} = -2", v: -5 }, { l: "\\frac{2x}{5} = -2", v: -5 },
+                    { l: "\\frac{x}{2} + 1 = -1", v: -4 }, { l: "\\frac{x}{3} = -2", v: -6 }, { l: "\\frac{x}{4} + 2 = 1", v: -4 },
+                    { l: "\\frac{2x+4}{2} = 0", v: -2 }, { l: "\\frac{3x}{4} = -3", v: -4 }, { l: "\\frac{x}{2} = -3", v: -6 },
+                    { l: "\\frac{x}{5} - 1 = -2", v: -5 }, { l: "\\frac{x+3}{2} = -1", v: -5 }, { l: "\\frac{2x}{3} = -4", v: -6 },
+                    { l: "\\frac{x}{6} = -1", v: -6 }, { l: "\\frac{4x}{5} = -4", v: -5 }
+                ]
+            }
+        };
+
+        class Game {
+            constructor() {
+                this.timerInterval = null;
+                // Game config
+                this.turnDuration = 60; // seconds
+
+                this.startLevel = 1; // Default starting level
+                this.gameMode = 'multi'; // 'single' or 'multi'
+
+                this.state = {
+                    level: 1, 
+                    turn: 'p1', 
+                    turnTimer: this.turnDuration,
+                    p1: { name: 'Player 1', score: 10, time: 180 }, 
+                    p2: { name: 'Player 2', score: 10, time: 180 },
+                    activeCards: []
+                };
+
+                this.els = {
+                    startScreen: document.getElementById('start-screen'),
+                    gameOverScreen: document.getElementById('game-over-screen'),
+                    arena: document.getElementById('arena'),
+                    levelInfo: document.getElementById('level-info'),
+                    gameHud: document.getElementById('game-hud'),
+                    
+                    p1Panel: document.getElementById('p1-panel'),
+                    p2Panel: document.getElementById('p2-panel'),
+                    
+                    hudNameP1: document.getElementById('hud-name-p1'),
+                    hudNameP2: document.getElementById('hud-name-p2'),
+                    timerP1: document.getElementById('timer-p1'),
+                    timerP2: document.getElementById('timer-p2'),
+                    turnBarP1: document.getElementById('turn-bar-p1'),
+                    turnBarP2: document.getElementById('turn-bar-p2'),
+                    scoreP1: document.getElementById('score-p1'),
+                    scoreP2: document.getElementById('score-p2'),
+                    ruleTarget: document.getElementById('rule-target'),
+
+                    inputP1: document.getElementById('input-p1'),
+                    inputP2: document.getElementById('input-p2'),
+                    
+                    winnerText: document.getElementById('winner-text'),
+                    winReason: document.getElementById('win-reason'),
+                    endNameP1: document.getElementById('end-name-p1'),
+                    endNameP2: document.getElementById('end-name-p2'),
+                    endScoreP1: document.getElementById('end-score-p1'),
+                    endScoreP2: document.getElementById('end-score-p2'),
+                    endP2Container: document.getElementById('end-p2-container'),
+                };
+            }
+
+            selectLevel(lvl) {
+                this.startLevel = lvl;
+                // Visual update
+                for(let i=1; i<=4; i++) {
+                    const btn = document.getElementById(`btn-lvl-${i}`);
+                    if(btn) {
+                        if(i === lvl) btn.classList.add('active');
+                        else btn.classList.remove('active');
+                    }
+                }
+            }
+
+            selectMode(mode) {
+                this.gameMode = mode;
+                
+                // Visual Buttons
+                document.getElementById('btn-mode-1p').classList.toggle('active', mode === 'single');
+                document.getElementById('btn-mode-2p').classList.toggle('active', mode === 'multi');
+
+                // Toggle visibility of P2 elements
+                const p2Els = document.querySelectorAll('.p2-only');
+                p2Els.forEach(el => {
+                    el.style.display = mode === 'single' ? 'none' : (el.classList.contains('input-group') ? 'flex' : '');
+                });
+
+                // Update Rule Text
+                if (mode === 'single') {
+                    this.els.ruleTarget.innerHTML = "🚀 TARGET: Skor 50 Menang!";
+                } else {
+                    this.els.ruleTarget.innerHTML = "🚀 RACE TO 30: Siapa cepat dapat Skor 30 Menang!";
+                }
+            }
+
+            start() {
+                const n1 = this.els.inputP1.value.trim() || "Player 1";
+                const n2 = this.els.inputP2.value.trim() || "Player 2";
+                
+                // Reset State
+                this.state = {
+                    level: this.startLevel, 
+                    turn: 'p1',
+                    turnTimer: this.turnDuration,
+                    p1: { name: n1, score: 10, time: 180 },
+                    p2: { name: n2, score: 10, time: 180 },
+                    activeCards: []
+                };
+
+                // Apply Mode Styles to Body
+                if (this.gameMode === 'single') {
+                    document.body.classList.add('single-mode');
+                } else {
+                    document.body.classList.remove('single-mode');
+                }
+
+                this.els.hudNameP1.textContent = n1;
+                this.els.hudNameP2.textContent = n2;
+                this.updateScoreUI();
+                this.updateTimerUI();
+                this.updateTurnUI();
+                this.updateTurnBarUI();
+
+                this.els.startScreen.classList.add('hidden');
+                this.els.gameOverScreen.classList.add('hidden');
+                this.els.gameHud.classList.remove('invisible');
+                this.els.levelInfo.classList.remove('invisible');
+
+                this.generateLevel();
+                
+                if (this.timerInterval) clearInterval(this.timerInterval);
+                this.timerInterval = setInterval(() => this.tick(), 1000);
+            }
+
+            getRandomSet(array, count) {
+                // Ensure we handle arrays smaller than count gracefully
+                const shuffled = [...array].sort(() => 0.5 - Math.random());
+                return shuffled.slice(0, count);
+            }
+
+            generateLevel() {
+                this.els.arena.innerHTML = '';
+                
+                let diffPos, diffNeg, label;
+                if (this.state.level === 1) { diffPos = qBank.easy.pos; diffNeg = qBank.easy.neg; label = "Level 1: Mudah"; }
+                else if (this.state.level === 2) { diffPos = qBank.medium.pos; diffNeg = qBank.medium.neg; label = "Level 2: Sedang"; }
+                else if (this.state.level === 3) { diffPos = qBank.hard.pos; diffNeg = qBank.hard.neg; label = "Level 3: Sulit"; }
+                else { diffPos = qBank.veryHard.pos; diffNeg = qBank.veryHard.neg; label = "Level 4: Sangat Sulit (Pecahan)"; }
+
+                this.els.levelInfo.textContent = label;
+                playSound('levelup');
+
+                // Pick 5 from Pos and 5 from Neg
+                const posCards = this.getRandomSet(diffPos, 5);
+                const negCards = this.getRandomSet(diffNeg, 5);
+                
+                const levelData = [...posCards, ...negCards].sort(() => 0.5 - Math.random());
+                this.state.activeCards = levelData;
+
+                levelData.forEach((q, idx) => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.innerHTML = `\\( ${q.l} \\)`;
+                    card.dataset.val = q.v;
+                    card.dataset.type = q.v > 0 ? 'pos' : 'neg'; 
+                    
+                    card.onclick = (e) => this.handleCardClick(card, q.v, e);
+                    this.els.arena.appendChild(card);
+                });
+
+                if (window.MathJax) MathJax.typesetPromise([this.els.arena]);
+            }
+
+            handleCardClick(card, value, event) {
+                if (card.classList.contains('popped')) return;
+
+                const player = this.state.turn;
+                
+                // Update Score logic
+                this.state[player].score += value;
+                this.updateScoreUI();
+
+                // -----------------------------------------------------
+                // WIN CONDITION LOGIC
+                // -----------------------------------------------------
+                if (this.gameMode === 'single') {
+                    if (this.state.p1.score >= 50) {
+                        this.endGame(this.state.p1.name, "TARGET 50 TERCAPAI!");
+                        return;
+                    }
+                } else {
+                    if (this.state[player].score >= 30) {
+                        const winnerName = this.state[player].name;
+                        this.endGame(winnerName, `RACE TO 30: ${winnerName} Mencapai Skor 30!`);
+                        return;
+                    }
+                }
+                // -----------------------------------------------------
+
+                // Check Negative Score Death
+                if (this.state[player].score < 0) {
+                    const loserName = this.state[player].name;
+                    if (this.gameMode === 'single') {
+                        this.endGame("GAME OVER", "Bangkrut (Skor Negatif)!");
+                    } else {
+                        const winnerName = player === 'p1' ? this.state.p2.name : this.state.p1.name;
+                        this.endGame(winnerName, `${loserName} Bangkrut (Skor Negatif)!`);
+                    }
+                    return; 
+                }
+
+                card.classList.add('popped');
+                
+                if (value > 0) {
+                    playSound('correct');
+                    this.spawnFloatingText(event.clientX, event.clientY, `+${value}`, player === 'p1' ? '#00d2ff' : '#ff47bc');
+                } else {
+                    playSound('wrong');
+                    this.spawnFloatingText(event.clientX, event.clientY, `${value}`, '#fff');
+                }
+
+                const remainingPos = Array.from(this.els.arena.children).filter(c => 
+                    !c.classList.contains('popped') && c.dataset.type === 'pos'
+                ).length;
+
+                if (remainingPos === 0) {
+                    this.state.level = Math.min(this.state.level + 1, 4); 
+                    setTimeout(() => this.generateLevel(), 500);
+                }
+
+                if (this.gameMode === 'multi') {
+                    this.switchTurn();
+                }
+            }
+
+            switchTurn() {
+                this.state.turn = this.state.turn === 'p1' ? 'p2' : 'p1';
+                this.state.turnTimer = this.turnDuration; // Reset Turn Timer
+                this.updateTurnUI();
+                this.updateTurnBarUI(); // Reset visual bar
+                playSound('switch');
+            }
+
+            spawnFloatingText(x, y, text, color) {
+                const el = document.createElement('div');
+                el.className = 'floating-points';
+                el.textContent = text;
+                el.style.left = `${x}px`;
+                el.style.top = `${y}px`;
+                el.style.color = color;
+                document.body.appendChild(el);
+                setTimeout(() => el.remove(), 800);
+            }
+
+            tick() {
+                const p = this.state.turn;
+                
+                // Decrement Global Time
+                if (this.gameMode === 'single') {
+                    this.state.p1.time--;
+                } else {
+                    this.state[p].time--;
+                    this.state.turnTimer--; // Only tick turn timer in multiplayer
+                }
+
+                this.updateTimerUI();
+                if (this.gameMode === 'multi') this.updateTurnBarUI();
+
+                // Check Game Over Conditions
+                const activeP = this.state[p];
+                if (activeP.time <= 0) {
+                    if (this.gameMode === 'single') {
+                        this.endGame("GAME OVER", "Waktu Habis!");
+                    } else {
+                        const loserName = activeP.name;
+                        const winnerName = p === 'p1' ? this.state.p2.name : this.state.p1.name;
+                        this.endGame(winnerName, `${loserName} Kehabisan Waktu!`);
+                    }
+                } 
+                else if (this.gameMode === 'multi' && this.state.turnTimer <= 0) {
+                    playSound('wrong'); 
+                    this.switchTurn();
+                }
+            }
+
+            updateScoreUI() {
+                this.els.scoreP1.textContent = this.state.p1.score;
+                this.els.scoreP2.textContent = this.state.p2.score;
+            }
+
+            updateTimerUI() {
+                const fmt = (s) => {
+                    if (s < 0) s = 0;
+                    const m = Math.floor(s / 60).toString().padStart(2,'0');
+                    const sec = (s % 60).toString().padStart(2,'0');
+                    return `${m}:${sec}`;
+                };
+                this.els.timerP1.textContent = fmt(this.state.p1.time);
+                this.els.timerP2.textContent = fmt(this.state.p2.time);
+            }
+
+            updateTurnBarUI() {
+                const pct = (this.state.turnTimer / this.turnDuration) * 100;
+                if (this.state.turn === 'p1') {
+                    this.els.turnBarP1.style.width = `${pct}%`;
+                    this.els.turnBarP1.style.backgroundColor = pct < 20 ? '#ff3333' : '#ffd700';
+                } else {
+                    this.els.turnBarP2.style.width = `${pct}%`;
+                    this.els.turnBarP2.style.backgroundColor = pct < 20 ? '#ff3333' : '#ffd700';
+                }
+            }
+
+            updateTurnUI() {
+                if (this.state.turn === 'p1') {
+                    this.els.p1Panel.classList.add('active-turn');
+                    this.els.p2Panel.classList.remove('active-turn');
+                } else {
+                    this.els.p1Panel.classList.remove('active-turn');
+                    this.els.p2Panel.classList.add('active-turn');
+                }
+            }
+
+            endGame(winnerName, reason) {
+                clearInterval(this.timerInterval);
+                
+                this.els.endNameP1.textContent = this.state.p1.name;
+                this.els.endScoreP1.textContent = this.state.p1.score;
+                
+                if (this.gameMode === 'multi') {
+                    this.els.endNameP2.textContent = this.state.p2.name;
+                    this.els.endScoreP2.textContent = this.state.p2.score;
+                    this.els.endP2Container.style.display = 'block';
+                } else {
+                    this.els.endP2Container.style.display = 'none';
+                }
+
+                if (winnerName === "GAME OVER") {
+                    this.els.winnerText.textContent = "GAME OVER";
+                    this.els.winnerText.style.color = "#ff3333";
+                } else {
+                    this.els.winnerText.textContent = `${winnerName} Menang!`;
+                    this.els.winnerText.style.color = "#ffd700";
+                }
+                
+                this.els.winReason.textContent = reason;
+                
+                this.els.gameOverScreen.classList.remove('hidden');
+                this.els.gameHud.classList.add('invisible');
+                this.els.levelInfo.classList.add('invisible');
+            }
+        }
+
+        const game = new Game();
+        // Init default mode
+        game.selectMode('multi'); 
+        
+        // AUTO SCALING LOGIC FOR TV
+        function resizeGame() {
+            const gameContainer = document.getElementById('game-container');
+            const targetWidth = 960;
+            const targetHeight = 540;
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+            
+            const scaleX = windowWidth / targetWidth;
+            const scaleY = windowHeight / targetHeight;
+            const scale = Math.min(scaleX, scaleY); // Maintain aspect ratio
+            
+            gameContainer.style.transform = `scale(${scale})`;
+        }
+        
+        window.addEventListener('resize', resizeGame);
+        window.onload = () => {
+            resizeGame();
+            // Ensure MathJax renders if not already loaded by other means
+            if(window.MathJax) MathJax.typesetPromise();
+        };
+    </script>
+</body>
+</html>
