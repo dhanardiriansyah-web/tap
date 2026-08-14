@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Algebra Rush: TV Edition</title>
-    
+        
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;600&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
 
-    <!-- MathJax -->
+    <!-- MathJax for Rendering Math Equations -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
@@ -52,7 +52,6 @@
             overflow: hidden;
         }
 
-        /* --- CONTAINER 960x540 (Base Resolution) --- */
         #game-container {
             width: 960px;
             height: 540px;
@@ -63,7 +62,6 @@
             flex-direction: column;
             overflow: hidden;
             box-shadow: 0 0 50px rgba(0,0,0,0.5);
-            /* Important for scaling */
             transform-origin: center center;
         }
 
@@ -75,8 +73,7 @@
         /* Single Player Specific Styles */
         .single-mode .p2-only { display: none !important; }
         .single-mode .player-panel.p1 { margin: 0 auto; width: 60%; }
-        
-        /* --- SCREENS --- */
+
         #start-screen, #game-over-screen {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -100,7 +97,6 @@
             margin: 5px 0 10px 0;
         }
 
-        /* --- MODE SELECTOR --- */
         .mode-selector {
             display: flex;
             gap: 15px;
@@ -126,30 +122,6 @@
             transform: scale(1.05);
         }
 
-        .input-group {
-            display: flex;
-            gap: 15px;
-            margin: 5px 0 10px 0;
-            justify-content: center;
-            align-items: center;
-            height: 40px;
-        }
-
-        .name-input {
-            padding: 8px 15px;
-            border-radius: 20px;
-            border: 2px solid #fff;
-            background: rgba(255,255,255,0.1);
-            color: white;
-            font-family: 'Fredoka';
-            font-size: 1rem;
-            text-align: center;
-            width: 140px;
-        }
-        .name-input::placeholder { color: rgba(255,255,255,0.5); }
-        .name-input:focus { outline: none; background: rgba(255,255,255,0.2); }
-
-        /* --- DIFFICULTY SELECTOR --- */
         .diff-container {
             margin: 5px 0 10px 0;
             display: flex;
@@ -193,7 +165,6 @@
         }
         .btn-start:active { transform: translateY(4px); box-shadow: 0 0 0 #b37700; }
 
-        /* Rules Box adjusted */
         .rules-box {
             background: rgba(255,255,255,0.1); 
             padding: 10px 20px; 
@@ -201,13 +172,12 @@
             max-width: 600px; 
             margin-bottom: 5px;
             font-size: 0.9rem;
-            color: #ffffff; /* FORCE WHITE COLOR */
+            color: #ffffff;
             border: 1px solid rgba(255,255,255,0.2);
         }
         .rules-box p { margin: 3px 0; }
         .rules-box ul { margin: 3px 0 3px 20px; padding: 0; }
 
-        /* --- HUD --- */
         header {
             height: 90px;
             min-height: 90px;
@@ -314,7 +284,6 @@
         }
         .active-turn .turn-indicator { opacity: 1; }
 
-        /* --- ARENA --- */
         #level-info {
             text-align: center;
             font-family: 'Fredoka', cursive;
@@ -342,7 +311,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            /* Font size reduced to prevent cutoff */
             font-size: 0.9rem; 
             font-weight: bold;
             color: var(--card-text);
@@ -354,7 +322,6 @@
             overflow: hidden;
             height: 100%; 
             text-align: center;
-            /* Padding added for breathing room */
             padding: 0 4px;
         }
         
@@ -363,11 +330,9 @@
         .card mjx-container {
             margin: 0 !important;
             pointer-events: none; 
-            /* Scaled down slightly to fit */
             font-size: 100% !important; 
         }
 
-        /* Logic Styles */
         .card.popped {
             visibility: hidden;
             pointer-events: none;
@@ -376,7 +341,6 @@
         .card.p1-hit { background: var(--p1-color) !important; color: #fff !important; }
         .card.p2-hit { background: var(--p2-color) !important; color: #fff !important; }
 
-        /* Floating Points */
         .floating-points {
             position: fixed; 
             font-family: 'Fredoka', cursive;
@@ -398,14 +362,10 @@
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
-
     </style>
 </head>
 <body>
-
-    <!-- WRAPPER FOR 960x540 (AUTO SCALED) -->
     <div id="game-container">
-        
         <!-- Start Screen -->
         <div id="start-screen" class="flex-center">
             <h1>Algebra Rush</h1>
@@ -416,13 +376,7 @@
                 <button id="btn-mode-2p" class="btn-mode active" onclick="game.selectMode('multi')">2 PLAYERS</button>
             </div>
 
-            <div class="input-group">
-                <input id="input-p1" class="name-input" type="text" value="Player 1" placeholder="P1 Name" style="border-color: var(--p1-color);">
-                <div class="p2-only" style="display:flex; align-items:center; font-weight:bold; font-size:1.2rem; color: #fff;">VS</div>
-                <input id="input-p2" class="name-input p2-only" type="text" value="Player 2" placeholder="P2 Name" style="border-color: var(--p2-color);">
-            </div>
-
-            <!-- DIFFICULTY SELECTION (GATE MASUK) -->
+            <!-- DIFFICULTY SELECTION -->
             <div class="diff-container">
                 <div class="diff-label">PILIH TINGKAT KESULITAN:</div>
                 <div class="diff-options">
@@ -446,7 +400,7 @@
                 <p style="margin:3px 0; color: #ff9999;"><strong>💀 GAME OVER JIKA:</strong></p>
                 <ul style="text-align: left; margin: 3px auto; width: fit-content; color: #ddd;">
                     <li>Kehabisan Waktu (3 Menit)</li>
-                    <li>Skor menjadi Negatif (< 0)</li>
+                    <li>Skor menjadi Negatif (&lt; 0)</li>
                 </ul>
             </div>
 
@@ -461,11 +415,11 @@
             
             <div style="display: flex; gap: 40px; margin-bottom: 20px;">
                 <div style="text-align: center;">
-                    <p id="end-name-p1" style="color:var(--p1-color); font-weight:bold; font-size: 1.2rem;">P1</p>
+                    <p id="end-name-p1" style="color:var(--p1-color); font-weight:bold; font-size: 1.2rem;">Player 1</p>
                     <p id="end-score-p1" style="font-size:2.5rem; font-family:'Fredoka'; margin:0;">0</p>
                 </div>
                 <div id="end-p2-container" style="text-align: center;">
-                    <p id="end-name-p2" style="color:var(--p2-color); font-weight:bold; font-size: 1.2rem;">P2</p>
+                    <p id="end-name-p2" style="color:var(--p2-color); font-weight:bold; font-size: 1.2rem;">Player 2</p>
                     <p id="end-score-p2" style="font-size:2.5rem; font-family:'Fredoka'; margin:0;">0</p>
                 </div>
             </div>
@@ -505,8 +459,7 @@
         <section id="arena">
             <!-- Cards generated by JS -->
         </section>
-
-    </div> <!-- END CONTAINER -->
+    </div>
 
     <script>
         const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -554,7 +507,6 @@
             }
         }
 
-        // FULL 160 QUESTION BANK (4 Levels x 2 Types x 20 Questions)
         const qBank = {
             easy: {
                 pos: [
@@ -641,10 +593,9 @@
         class Game {
             constructor() {
                 this.timerInterval = null;
-                // Game config
                 this.turnDuration = 60; // seconds
 
-                this.startLevel = 1; // Default starting level
+                this.startLevel = 1; 
                 this.gameMode = 'multi'; // 'single' or 'multi'
 
                 this.state = {
@@ -675,9 +626,6 @@
                     scoreP1: document.getElementById('score-p1'),
                     scoreP2: document.getElementById('score-p2'),
                     ruleTarget: document.getElementById('rule-target'),
-
-                    inputP1: document.getElementById('input-p1'),
-                    inputP2: document.getElementById('input-p2'),
                     
                     winnerText: document.getElementById('winner-text'),
                     winReason: document.getElementById('win-reason'),
@@ -691,7 +639,6 @@
 
             selectLevel(lvl) {
                 this.startLevel = lvl;
-                // Visual update
                 for(let i=1; i<=4; i++) {
                     const btn = document.getElementById(`btn-lvl-${i}`);
                     if(btn) {
@@ -703,18 +650,9 @@
 
             selectMode(mode) {
                 this.gameMode = mode;
-                
-                // Visual Buttons
                 document.getElementById('btn-mode-1p').classList.toggle('active', mode === 'single');
                 document.getElementById('btn-mode-2p').classList.toggle('active', mode === 'multi');
 
-                // Toggle visibility of P2 elements
-                const p2Els = document.querySelectorAll('.p2-only');
-                p2Els.forEach(el => {
-                    el.style.display = mode === 'single' ? 'none' : (el.classList.contains('input-group') ? 'flex' : '');
-                });
-
-                // Update Rule Text
                 if (mode === 'single') {
                     this.els.ruleTarget.innerHTML = "🚀 TARGET: Skor 50 Menang!";
                 } else {
@@ -723,10 +661,9 @@
             }
 
             start() {
-                const n1 = this.els.inputP1.value.trim() || "Player 1";
-                const n2 = this.els.inputP2.value.trim() || "Player 2";
+                const n1 = "Player 1";
+                const n2 = "Player 2";
                 
-                // Reset State
                 this.state = {
                     level: this.startLevel, 
                     turn: 'p1',
@@ -736,7 +673,6 @@
                     activeCards: []
                 };
 
-                // Apply Mode Styles to Body
                 if (this.gameMode === 'single') {
                     document.body.classList.add('single-mode');
                 } else {
@@ -762,7 +698,6 @@
             }
 
             getRandomSet(array, count) {
-                // Ensure we handle arrays smaller than count gracefully
                 const shuffled = [...array].sort(() => 0.5 - Math.random());
                 return shuffled.slice(0, count);
             }
@@ -779,19 +714,18 @@
                 this.els.levelInfo.textContent = label;
                 playSound('levelup');
 
-                // Pick 5 from Pos and 5 from Neg
                 const posCards = this.getRandomSet(diffPos, 5);
                 const negCards = this.getRandomSet(diffNeg, 5);
                 
                 const levelData = [...posCards, ...negCards].sort(() => 0.5 - Math.random());
                 this.state.activeCards = levelData;
 
-                levelData.forEach((q, idx) => {
+                levelData.forEach((q) => {
                     const card = document.createElement('div');
                     card.className = 'card';
                     card.innerHTML = `\\( ${q.l} \\)`;
                     card.dataset.val = q.v;
-                    card.dataset.type = q.v > 0 ? 'pos' : 'neg'; 
+                    card.dataset.type = q.v > 0 ? 'pos' : 'neg';
                     
                     card.onclick = (e) => this.handleCardClick(card, q.v, e);
                     this.els.arena.appendChild(card);
@@ -805,13 +739,10 @@
 
                 const player = this.state.turn;
                 
-                // Update Score logic
                 this.state[player].score += value;
                 this.updateScoreUI();
 
-                // -----------------------------------------------------
-                // WIN CONDITION LOGIC
-                // -----------------------------------------------------
+                // Win Conditions
                 if (this.gameMode === 'single') {
                     if (this.state.p1.score >= 50) {
                         this.endGame(this.state.p1.name, "TARGET 50 TERCAPAI!");
@@ -824,9 +755,8 @@
                         return;
                     }
                 }
-                // -----------------------------------------------------
 
-                // Check Negative Score Death
+                // Negative Score Death
                 if (this.state[player].score < 0) {
                     const loserName = this.state[player].name;
                     if (this.gameMode === 'single') {
@@ -864,9 +794,9 @@
 
             switchTurn() {
                 this.state.turn = this.state.turn === 'p1' ? 'p2' : 'p1';
-                this.state.turnTimer = this.turnDuration; // Reset Turn Timer
+                this.state.turnTimer = this.turnDuration;
                 this.updateTurnUI();
-                this.updateTurnBarUI(); // Reset visual bar
+                this.updateTurnBarUI();
                 playSound('switch');
             }
 
@@ -884,18 +814,16 @@
             tick() {
                 const p = this.state.turn;
                 
-                // Decrement Global Time
                 if (this.gameMode === 'single') {
                     this.state.p1.time--;
                 } else {
                     this.state[p].time--;
-                    this.state.turnTimer--; // Only tick turn timer in multiplayer
+                    this.state.turnTimer--;
                 }
 
                 this.updateTimerUI();
                 if (this.gameMode === 'multi') this.updateTurnBarUI();
 
-                // Check Game Over Conditions
                 const activeP = this.state[p];
                 if (activeP.time <= 0) {
                     if (this.gameMode === 'single') {
@@ -980,10 +908,8 @@
         }
 
         const game = new Game();
-        // Init default mode
         game.selectMode('multi'); 
-        
-        // AUTO SCALING LOGIC FOR TV
+
         function resizeGame() {
             const gameContainer = document.getElementById('game-container');
             const targetWidth = 960;
@@ -993,7 +919,7 @@
             
             const scaleX = windowWidth / targetWidth;
             const scaleY = windowHeight / targetHeight;
-            const scale = Math.min(scaleX, scaleY); // Maintain aspect ratio
+            const scale = Math.min(scaleX, scaleY);
             
             gameContainer.style.transform = `scale(${scale})`;
         }
@@ -1001,7 +927,6 @@
         window.addEventListener('resize', resizeGame);
         window.onload = () => {
             resizeGame();
-            // Ensure MathJax renders if not already loaded by other means
             if(window.MathJax) MathJax.typesetPromise();
         };
     </script>
